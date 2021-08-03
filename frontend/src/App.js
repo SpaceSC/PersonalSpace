@@ -33,7 +33,7 @@ function App() {
       <div className="App">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
-        {user && user.apiStatuses.people_in_space && <PeopleInSpace />}
+        {user && <PeopleInSpace user={user} setUser={setUser}/>}
       </div>
 
       <Router>
