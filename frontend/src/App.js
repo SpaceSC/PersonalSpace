@@ -20,10 +20,16 @@ function App() {
     setUser({ google_id: decoded.google_id, picture: decoded.picture, name: decoded.given_name});
   }
 
+  const logout = () => {
+    localStorage.removeItem("myToken");
+    setUser(false);
+  }
+
   return (
     <div>
       <div className="App">
         {!user && <button onClick={loginAuth}>Login</button>}
+        {user && <button onClick={logout}>Log Out</button>}
       </div>
 
       <Router>
