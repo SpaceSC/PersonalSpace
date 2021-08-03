@@ -73,6 +73,22 @@ app.post("/api/login", async (req, res) => {
   
 })
 
+app.post("/api/toggle-status", async (req, res) => {
+
+  const token = req.headers.authorization;
+  console.log("token", token);
+  const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+  console.log("verified token", verifiedToken);
+
+  const filter = { google_id: verifiedToken.google_id };
+  const update = { "apis.people_in_space": req.body.status };
+
+  const existingStatus = await User.findOneAndUpdate(filter, update);
+
+  res.json({ message: "api status updated" }); 
+})
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Personal Space app listening at http://localhost:${process.env.PORT}`);
