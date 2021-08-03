@@ -61,6 +61,7 @@ app.post("/api/login", async (req, res) => {
   const filter = { google_id };
   const update = { google_id, given_name, family_name, picture, email };
   await User.findOneAndUpdate(filter, update, {
+    setDefaultsOnInsert: true,
     new: true, // return the new data, but now we don't store it in a variable
     upsert: true // Make this update into an upsert
   });
