@@ -1,17 +1,37 @@
 import './App.css';
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import Login from './components/Login';
+import jwt_decode from "jwt-decode";
+
 
 function App() {
+  const [user, setUser] = useState(false);
+
+  // redirects browser to url
+  const loginAuth = () => {
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=531055017285-g439thvkf4n03d55vu40aoi1a62sn0rd.apps.googleusercontent.com&scope=openid%20email%20profile&redirect_uri=http%3A//localhost:3000/login&prompt=select_account`;
+  };
+
+  // decode token
+  const login = () => {
+
+    const decoded = jwt_decode(localStorage.getItem('myToken'));
+    setUser({ google_id: decoded.google_id, picture: decoded.picture, name: decoded.given_name});
+  }
+
   return (
     <div>
       <div className="App">
-     
+        {!user && <button onClick={loginAuth}>Login</button>}
       </div>
 
       <Router>
         <Switch>
           <Route exact path="/" />
-          <Route exact path="/login" />
+          <Route exact path="/login">
+            <Login login={login}/>
+          </Route>
           <Redirect to="/" />
         </Switch>
       </Router>
