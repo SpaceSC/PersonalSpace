@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Login from './components/Login';
 import jwt_decode from "jwt-decode";
+import PeopleInSpace from './components/PeopleInSpace';
 
 
 function App() {
@@ -17,7 +18,9 @@ function App() {
   const login = () => {
 
     const decoded = jwt_decode(localStorage.getItem('myToken'));
-    setUser({ google_id: decoded.google_id, picture: decoded.picture, name: decoded.given_name});
+    setUser({ google_id: decoded.google_id, picture: decoded.picture, name: decoded.given_name, apiStatuses: decoded.apiStatuses });
+    console.log(decoded.apiStatuses);
+
   }
 
   const logout = () => {
@@ -30,6 +33,7 @@ function App() {
       <div className="App">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
+        {user && user.apiStatuses.people_in_space && <PeopleInSpace />}
       </div>
 
       <Router>

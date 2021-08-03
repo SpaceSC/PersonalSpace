@@ -60,13 +60,13 @@ app.post("/api/login", async (req, res) => {
 
   const filter = { google_id };
   const update = { google_id, given_name, family_name, picture, email };
-  await User.findOneAndUpdate(filter, update, {
+  const user = await User.findOneAndUpdate(filter, update, {
     setDefaultsOnInsert: true,
     new: true, // return the new data, but now we don't store it in a variable
     upsert: true // Make this update into an upsert
   });
     
-  const token = jwt.sign({ google_id, picture, given_name }, process.env.JWT_SECRET); // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
+  const token = jwt.sign({ google_id, picture, given_name, apiStatuses: user.apis }, process.env.JWT_SECRET); // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
   
   // token is a string, now make it into an object {token: token}
   res.json({ token }); //between {}, token it becomes a key: value pair: token: token
