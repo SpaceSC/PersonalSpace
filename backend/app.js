@@ -12,6 +12,10 @@ const User = require('./models/user.model')
 // express json middleware
 app.use(express.json())
 
+app.get("/api/test", (req, res) => {
+  res.json({message: "My test endpoint"});
+})
+
 
 app.post("/api/login", async (req, res) => {
 
