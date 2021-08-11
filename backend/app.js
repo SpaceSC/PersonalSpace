@@ -3,7 +3,9 @@ require('express-async-errors');
 const app = express();
 const fetch = require("node-fetch");
 const jwt = require('jsonwebtoken');
-const User = require('./models/user.model')
+const User = require('./models/user.model');
+const errorHandler = require('./middleware/errorHandler');
+const notFoundHandler = require('./middleware/notFoundHandler');
 
 // USE CORS FOR BUILD
 // const cors = require('cors');
@@ -13,7 +15,7 @@ const User = require('./models/user.model')
 // express json middleware
 app.use(express.json())
 
-app.get("/api/test", (req, res) => {
+app.get("/api/test", async (req, res) => {
   res.json({message: "My test endpoint"});
 })
 
@@ -84,6 +86,11 @@ app.post("/api/toggle-status", async (req, res) => {
 
   res.json({ message: "api status updated" }); 
 })
+
+// catch 404 and forward to error handler
+app.use(notFoundHandler);
+
+app.use(errorHandler);
 
 
 module.exports = app;
