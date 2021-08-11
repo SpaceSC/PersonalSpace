@@ -4,7 +4,9 @@
   "description": "",
   "main": "start.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12"
   }
 }
