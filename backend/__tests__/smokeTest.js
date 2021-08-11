@@ -8,7 +8,7 @@ describe("Smoke tests", () => {
   });
 
   it("Tests if supertest works", async () => {
-    const response = await request.get("/api/something/not-exist")
+    const response = await request.get("/api/something/does-not-exist")
 
     expect(response.status).toBe(404)
   })
