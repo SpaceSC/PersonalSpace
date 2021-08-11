@@ -33,7 +33,7 @@ function App() {
       <div className="App">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
-        {user && <PeopleInSpace user={user} setUser={setUser}/>}
+        {user && <PeopleInSpace user={user} setUser={setUser} logout={logout}/>}
       </div>
 
       <Router>

@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
@@ -13,22 +12,6 @@ const User = require('./models/user.model')
 // express json middleware
 app.use(express.json())
 
-// mongoose
-const mongoose = require("mongoose");
-
-// connect to mongoDB
-mongoose.connect(`${process.env.MONGO_LINK}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false, // recommended in connection
-  useCreateIndex: true, // only in devdelopment
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("db connected!");
-});
 
 app.post("/api/login", async (req, res) => {
 
@@ -75,13 +58,22 @@ app.post("/api/login", async (req, res) => {
 
 app.post("/api/toggle-status", async (req, res) => {
 
+  const { api, status } = req.body;
+
   const token = req.headers.authorization;
   console.log("token", token);
-  const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+  let verifiedToken;
+  try {
+    verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return res.status(401).json("Unauthorized")
+  }
+ 
   console.log("verified token", verifiedToken);
 
   const filter = { google_id: verifiedToken.google_id };
-  const update = { "apis.people_in_space": req.body.status };
+  // template string as object key should be in []
+  const update = { [`apis.${api}`]: status };
 
   const existingStatus = await User.findOneAndUpdate(filter, update);
 
@@ -89,11 +81,4 @@ app.post("/api/toggle-status", async (req, res) => {
 })
 
 
-
-app.listen(process.env.PORT, () => {
-  console.log(`Personal Space app listening at http://localhost:${process.env.PORT}`);
-});
-
-
-
-
+module.exports = app;
