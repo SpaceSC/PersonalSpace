@@ -1,5 +1,6 @@
 // export one function without name, no need to call it, only to require
 module.exports = (req, res, next) => {
-  // render the error page
-  next(res.status(404).json({message: 'Page not found'}));
-}
+  const error = new Error("Page not found");
+  error.status = 404;
+  next(error);
+};
