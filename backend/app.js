@@ -1,4 +1,5 @@
 const express = require("express");
+require('express-async-errors');
 const app = express();
 const fetch = require("node-fetch");
 const jwt = require('jsonwebtoken');
