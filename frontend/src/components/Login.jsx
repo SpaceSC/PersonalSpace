@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-function Login({login}) {
+function Login({ login }) {
   let history = useHistory();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Login({login}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ code }), // if key is same as value, use it once
-        });
+      });
       const data = await response.json();
 
       //console.log(data); // the token
@@ -28,12 +28,13 @@ function Login({login}) {
         return history.push("/");
       }
       localStorage.setItem("myToken", data.token);
-      login();
+      login(data.apiStatuses);
 
       history.push("/"); // can be used in javascript, redirects to home like Link would (inside return), or like Redirect would
     };
     loginPost();
-  }, []);
+  }, []); // eslint-disable-line 
+  // disables warning in browser
 
   return <div>Loading...</div>;
 }

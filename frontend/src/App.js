@@ -1,13 +1,31 @@
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Login from './components/Login';
+import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
-import PeopleInSpace from './components/PeopleInSpace';
-
+import PeopleInSpace from "./components/PeopleInSpace";
 
 function App() {
   const [user, setUser] = useState(false);
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      const myToken = localStorage.getItem("myToken");
+      if (myToken) {
+        const response = await fetch("/api/check-logged-in", {
+          headers: {
+            Authorization: myToken,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          return login(data.apiStatuses);
+        }
+      }
+    };
+    checkLoggedIn();
+  }, []);
 
   // redirects browser to url
   const loginAuth = () => {
@@ -15,32 +33,35 @@ function App() {
   };
 
   // decode token
-  const login = () => {
-
-    const decoded = jwt_decode(localStorage.getItem('myToken'));
-    setUser({ google_id: decoded.google_id, picture: decoded.picture, name: decoded.given_name, apiStatuses: decoded.apiStatuses });
-    console.log(decoded.apiStatuses);
-
-  }
+  const login = (apiStatuses) => {
+    const decoded = jwt_decode(localStorage.getItem("myToken"));
+    setUser({
+      google_id: decoded.google_id,
+      picture: decoded.picture,
+      name: decoded.given_name,
+      apiStatuses: apiStatuses,
+    });
+    console.log(apiStatuses);
+  };
 
   const logout = () => {
     localStorage.removeItem("myToken");
     setUser(false);
-  }
+  };
 
   return (
     <div>
       <div className="App">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
-        {user && <PeopleInSpace user={user} setUser={setUser} logout={logout}/>}
+        {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
       </div>
 
       <Router>
         <Switch>
           <Route exact path="/" />
           <Route exact path="/login">
-            <Login login={login}/>
+            <Login login={login} />
           </Route>
           <Redirect to="/" />
         </Switch>

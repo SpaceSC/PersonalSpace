@@ -9,4 +9,6 @@ router.post("/login", userController.login)
 
 router.post("/toggle-api-status", verifyToken, userController.apiStatusToggle)
 
+router.get("/check-logged-in", verifyToken, userController.checkLoggedIn)
+
 module.exports = router

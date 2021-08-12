@@ -38,10 +38,17 @@ exports.login = async (req, res) => {
     upsert: true // Make this update into an upsert
   });
     
-  const token = jwt.sign({ google_id, picture, given_name, apiStatuses: user.apis }, process.env.JWT_SECRET); // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
+  const token = jwt.sign({ google_id, picture, given_name }, process.env.JWT_SECRET); // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
+ 
+  res.json({ token, apiStatuses: user.apis }); //between {}, token it becomes a key: value pair: token: token
   
-  // token is a string, now make it into an object {token: token}
-  res.json({ token }); //between {}, token it becomes a key: value pair: token: token
+}
+
+
+exports.checkLoggedIn = async (req, res) => {
+
+  const user = await User.findOne({google_id: res.locals.google_id});
+  res.json({apiStatuses: user.apis})
   
 }
 
