@@ -49,18 +49,8 @@ exports.apiStatusToggle = async (req, res) => {
 
   const { api, status } = req.body;
 
-  const token = req.headers.authorization;
-  console.log("token", token);
-  let verifiedToken;
-  try {
-    verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (err) {
-    return res.status(401).json("Unauthorized")
-  }
- 
-  console.log("verified token", verifiedToken);
-
-  const filter = { google_id: verifiedToken.google_id };
+  
+  const filter = { google_id: res.locals.google_id };
   // template string as object key should be in []
   const update = { [`apis.${api}`]: status };
 
