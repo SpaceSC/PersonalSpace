@@ -65,3 +65,10 @@ exports.apiStatusToggle = async (req, res) => {
 
   res.json({ message: "api status updated" }); 
 }
+
+exports.deleteAccount = async (req, res) => {
+
+  const user = await User.findOneAndDelete({google_id: res.locals.google_id});
+  res.json({message: `${user.given_name}'s account has been deleted.`})
+  
+}

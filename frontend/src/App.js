@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
 import PeopleInSpace from "./components/PeopleInSpace";
+import DeleteAccount from "./components/DeleteAccount";
 
 function App() {
   const [user, setUser] = useState(false);
+  const [deleteResponse, setDeleteResponse] = useState("");
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -55,6 +57,8 @@ function App() {
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
         {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
+        {user && <DeleteAccount logout={logout} setDeleteResponse={setDeleteResponse}/>}
+        {deleteResponse && <p>{deleteResponse}</p>}
       </div>
 
       <Router>
