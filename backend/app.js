@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/user.model');
 const errorHandler = require('./middleware/errorHandler');
 const notFoundHandler = require('./middleware/notFoundHandler');
+const testGetController = require('./controllers/testController');
 
 // USE CORS FOR BUILD
 // const cors = require('cors');
@@ -15,9 +16,7 @@ const notFoundHandler = require('./middleware/notFoundHandler');
 // express json middleware
 app.use(express.json())
 
-app.get("/api/test", async (req, res) => {
-  res.json({message: "My test endpoint"});
-})
+app.get("/api/test", testGetController.testGet)
 
 
 app.post("/api/login", async (req, res) => {
