@@ -24,6 +24,7 @@ function App() {
           const data = await response.json();
           return login(data.apiStatuses);
         }
+        if (response.status === 404) logout();
       }
     };
     checkLoggedIn();

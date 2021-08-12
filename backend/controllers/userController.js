@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
 exports.checkLoggedIn = async (req, res) => {
 
   const user = await User.findOne({google_id: res.locals.google_id});
+  if(!user) return res.status(404).json({message: "User not found"})
   res.json({apiStatuses: user.apis})
   
 }
