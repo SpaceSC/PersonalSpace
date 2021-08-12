@@ -1,4 +1,6 @@
 const fetch = require("node-fetch");
+const jwt = require('jsonwebtoken');
+const User = require('../models/userModel');
 
 exports.login = async (req, res) => {
 
