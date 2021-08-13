@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^7.3.6",
     "mongoose": "^5.13.5",
     "node-fetch": "^2.6.1"
   },
@@ -24,5 +25,10 @@
     "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "supertest": "^6.1.5"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "util"
+    ]
   }
 }
