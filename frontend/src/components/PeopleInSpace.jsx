@@ -38,9 +38,9 @@ function PeopleInSpace({ user, setUser, logout }) {
   //console.log(user);
   return (
     <div>
+      <h2>How Many People Are In Space Right Now</h2>
       {user.apiStatuses.people_in_space && (
         <div>
-          <h2>How Many People Are In Space Right Now</h2>
           {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
           {spacePeople.map((spacePerson, index) => (
             <p key={index}>{spacePerson.name}</p>
