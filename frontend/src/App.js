@@ -62,7 +62,8 @@ function App() {
         {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}
         {user && <DeleteAccount logout={logout} setDeleteResponse={setDeleteResponse}/>}
         {deleteResponse && <p>{deleteResponse}</p>}
-        {user && <p>user.given_name</p> }
+        {user && <p>{user.name}</p> }
+        {user && <img src={user.picture} alt=""/>}
       </div>
 
       <Router>
