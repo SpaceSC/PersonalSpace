@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   } catch (err) {
     return res.status(401).json("Unauthorized");
   }
-  console.log("verified token", verifiedToken);
+  //console.log("verified token", verifiedToken);
   res.locals.google_id = verifiedToken.google_id;
   next();
 };

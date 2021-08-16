@@ -63,6 +63,7 @@ exports.apiStatusToggle = async (req, res) => {
   const update = { [`apis.${api}`]: status };
 
   const existingStatus = await User.findOneAndUpdate(filter, update);
+  if (!existingStatus) return res.status(404).json({message: "User not found"})
 
   res.json({ message: "api status updated" }); 
 }
