@@ -2,6 +2,8 @@
 
 https://wheretheiss.at/w/developer
 
+map: view-source:https://wheretheiss.at/
+
 International Space Station Current Location
 
 http://api.open-notify.org/
