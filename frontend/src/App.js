@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import PeopleInSpace from "./components/PeopleInSpace";
 import ISSCurrentLocation from "./components/ISSCurrentLocation";
 import DeleteAccount from "./components/DeleteAccount";
+import Apod from "./components/Apod";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -60,6 +61,7 @@ function App() {
         {user && <button onClick={logout}>Log Out</button>}
         {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
         {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}
+        {user && <Apod user={user} setUser={setUser} logout={logout} />}
         {user && <DeleteAccount logout={logout} setDeleteResponse={setDeleteResponse}/>}
         {deleteResponse && <p>{deleteResponse}</p>}
         {user && <p>{user.name}</p> }
