@@ -11,6 +11,8 @@ router.post("/toggle-api-status", verifyToken, userController.apiStatusToggle)
 
 router.get("/check-logged-in", verifyToken, userController.checkLoggedIn)
 
+router.get("/apod", verifyToken, userController.apod)
+
 router.delete("/delete-account", verifyToken, userController.deleteAccount)
 
 module.exports = router
