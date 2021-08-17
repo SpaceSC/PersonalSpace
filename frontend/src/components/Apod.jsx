@@ -6,12 +6,13 @@ function Apod({ user, setUser, logout }) {
 
    // set today's date for max date
   const today = new Date().toJSON().slice(0,10);
+  console.log(today);
 
   useEffect(() => {
     const fetchApodWithDate = async () => {
       let url =
       "/api/apod";
-    if (date) {
+    if (date && date !== today) {
       url += "/" + date;
     }
       const response = await fetch(url, {
@@ -65,6 +66,7 @@ function Apod({ user, setUser, logout }) {
             type="date"
             id="pickDate"
             name="pickDate"
+            min="1995-06-16"
             max={today}
             onChange={(e) => setDate(e.target.value)}
           />

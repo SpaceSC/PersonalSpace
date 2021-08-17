@@ -66,26 +66,3 @@ exports.deleteAccount = async (req, res) => {
   const user = await User.findOneAndDelete({ google_id: res.locals.google_id });
   res.json({ message: `${user.given_name}'s account has been deleted.` });
 };
-
-exports.apod = async (req, res) => {
-  const today = new Date().toJSON().slice(0,10);
-  let apod = await Apod.findOne({ date: today });
-  if (!apod) {
-    const response = await fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=JZLWuJDR9crbBSjYEFfoziVpdkNQq6FNywPhfzdT"
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return res.status(503).json("Houston, we've had a problem");
-    }
-
-    apod = new Apod({ date: data.date, explanation: data.explanation, media_type: data.media_type, title: data.title, url: data.url });
-    await apod.save();
-
-  }
-  
-  res.json(apod);
-  
-};
