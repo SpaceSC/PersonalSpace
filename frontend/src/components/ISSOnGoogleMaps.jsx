@@ -41,7 +41,7 @@ function ISSOnGoogleMaps() {
   //console.log(user);
   return (
     <div>
-      {!spaceStation && <h6>Loading Space Stations...</h6>}
+      {!spaceStation && <h6>Loading Space Station...</h6>}
       {spaceStation && (
         <div>
           <p>{spaceStation.name}</p>

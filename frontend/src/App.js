@@ -74,8 +74,7 @@ function App() {
         {user && <Apod user={user} setUser={setUser} logout={logout} />}
         {user && <DeleteAccount logout={logout} setDeleteResponse={setDeleteResponse}/>}
         {deleteResponse && <p>{deleteResponse}</p>}
-        {user && <p>{user.name}</p> }
-        {user && <img src={user.picture} alt=""/>}
+        
         
         </Route>
         {/* <Route exact path="/profile">
