@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
 import PeopleInSpace from "./components/PeopleInSpace";
@@ -8,7 +8,8 @@ import ISSCurrentLocation from "./components/ISSCurrentLocation";
 import DeleteAccount from "./components/DeleteAccount";
 import Apod from "./components/Apod";
 import SetUsername from "./components/SetUsername";
-import UserList from "./components/UserList";
+import UserListPage from "./pages/UserListPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -59,6 +60,13 @@ function App() {
   return (
     <div>
       <div className="App">
+        <Navbar user={user} login={login} logout={logout}/>
+        
+      </div>
+
+      
+      <Switch>
+        <Route exact path="/">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
         {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
@@ -69,18 +77,20 @@ function App() {
         {user && <p>{user.name}</p> }
         {user && <img src={user.picture} alt=""/>}
         {user && <SetUsername user={user} setUser={setUser} logout={logout}/>}
-        {user && <UserList user={user} setUser={setUser} logout={logout}/>}
-      </div>
-
-      <Router>
-        <Switch>
-          <Route exact path="/" />
-          <Route exact path="/login">
-            <Login login={login} />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </Router>
+        </Route>
+        {/* <Route exact path="/profile">
+          <Profile login={login} />
+        </Route> */}
+        <Route exact path="/login">
+          <Login login={login} />
+        </Route>
+        <Route exact path="/users">
+          {user && 
+          <UserListPage user={user} logout={logout}/>}
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+      
     </div>
   );
 }

@@ -3,21 +3,24 @@ import { useState, useEffect } from "react";
 function UserList({ user, setUser, logout }) {
   const [users, setUsers] = useState([]);
 
-
-  const fetchUsers = async () => {
-    const response = await fetch("/api/user-list", {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('myToken'),
-          }
-        });
-
-    const data = await response.json();
-
-     console.log("users", data);
-
-      setUsers(data);
-    };
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch("/api/user-list", {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": localStorage.getItem('myToken'),
+            }
+          });
+  
+      const data = await response.json();
+  
+       console.log("users", data);
+  
+        setUsers(data);
+      };
+      fetchUsers();
+  }, [])
+  
  
 
   // const toggle = async () => {
@@ -50,7 +53,7 @@ function UserList({ user, setUser, logout }) {
         </div>
       )}
 
-      <button onClick={fetchUsers}>List users</button>
+      
     </div>
   );
 }
