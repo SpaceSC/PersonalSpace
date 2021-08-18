@@ -8,6 +8,7 @@ import ISSCurrentLocation from "./components/ISSCurrentLocation";
 import DeleteAccount from "./components/DeleteAccount";
 import Apod from "./components/Apod";
 import SetUsername from "./components/SetUsername";
+import UserList from "./components/UserList";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -68,6 +69,7 @@ function App() {
         {user && <p>{user.name}</p> }
         {user && <img src={user.picture} alt=""/>}
         {user && <SetUsername user={user} setUser={setUser} logout={logout}/>}
+        {user && <UserList user={user} setUser={setUser} logout={logout}/>}
       </div>
 
       <Router>

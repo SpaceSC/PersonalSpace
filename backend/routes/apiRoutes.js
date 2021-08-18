@@ -18,6 +18,8 @@ router.get("/apod", verifyToken, apodController.getToday)
 
 router.get("/apod/:date", verifyToken, apodController.getByDate)
 
+router.get("/user-list", verifyToken, userController.getUsers)
+
 router.delete("/delete-account", verifyToken, userController.deleteAccount)
 
 module.exports = router

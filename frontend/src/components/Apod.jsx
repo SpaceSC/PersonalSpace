@@ -28,7 +28,7 @@ function Apod({ user, setUser, logout }) {
       setApod(data);
     };
     fetchApodWithDate();
-  }, [date]);
+  }, [date]);// eslint-disable-line
 
   const toggle = async () => {
     const response = await fetch("/api/toggle-api-status", {
