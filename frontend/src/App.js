@@ -4,6 +4,7 @@ import { Switch, Route, Redirect, Link } from "react-router-dom";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
 import PeopleInSpace from "./components/PeopleInSpace";
+import RandomFact from "./components/RandomFact";
 import ISSCurrentLocation from "./components/ISSCurrentLocation";
 import DeleteAccount from "./components/DeleteAccount";
 import Apod from "./components/Apod";
@@ -69,6 +70,7 @@ function App() {
         <Route exact path="/">
         {!user && <button onClick={loginAuth}>Login</button>}
         {user && <button onClick={logout}>Log Out</button>}
+        {user && <RandomFact user={user} setUser={setUser} logout={logout} />}
         {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
         {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}
         {user && <Apod user={user} setUser={setUser} logout={logout} />}

@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     },
+    random_fact: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 

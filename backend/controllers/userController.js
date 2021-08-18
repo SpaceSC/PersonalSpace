@@ -56,6 +56,13 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.getRandomFact = async (req, res) => {
+  
+  // const fact = new RandomFact({
+  //   fact: "Astronomers sometimes categorize Neptune and Uranus as ice giants because they are composed of heavier unstable substances. Saturn and Jupiter mostly consist of hydrogen and helium.",
+  //   source: "fungenerators.com",
+  // });
+  // await fact.save();
+
   // Get the count of all users
   const factCount = await RandomFact.countDocuments()
 
