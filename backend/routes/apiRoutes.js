@@ -10,6 +10,8 @@ router.post("/login", userController.login)
 
 router.post("/toggle-api-status", verifyToken, userController.apiStatusToggle)
 
+router.post("/set-username", verifyToken, userController.setUsername)
+
 router.get("/check-logged-in", verifyToken, userController.checkLoggedIn)
 
 router.get("/apod", verifyToken, apodController.getToday)

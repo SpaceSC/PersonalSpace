@@ -62,6 +62,23 @@ exports.apiStatusToggle = async (req, res) => {
   res.json({ message: "api status updated" });
 };
 
+exports.setUsername = async (req, res) => {
+  const { username } = req.body;
+
+  if (!/^[A-Za-z0-9]{1,50}$/.test(username)) return res.status(406).json({ message: "Not acceptable, numbers and English letters only" });
+
+  const existingUsername = await User.findOne({ username });
+  if (existingUsername) return res.status(400).json({ message: "Username already taken" });
+
+  const filter = { google_id: res.locals.google_id };
+  const update = { username };
+
+  const user = await User.findOneAndUpdate(filter, update);
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  res.json({ message: "Username updated" });
+};
+
 exports.deleteAccount = async (req, res) => {
   const user = await User.findOneAndDelete({ google_id: res.locals.google_id });
   res.json({ message: `${user.given_name}'s account has been deleted.` });
