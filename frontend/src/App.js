@@ -7,8 +7,8 @@ import PeopleInSpace from "./components/PeopleInSpace";
 import ISSCurrentLocation from "./components/ISSCurrentLocation";
 import DeleteAccount from "./components/DeleteAccount";
 import Apod from "./components/Apod";
-import SetUsername from "./components/SetUsername";
 import UserListPage from "./pages/UserListPage";
+import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -76,13 +76,17 @@ function App() {
         {deleteResponse && <p>{deleteResponse}</p>}
         {user && <p>{user.name}</p> }
         {user && <img src={user.picture} alt=""/>}
-        {user && <SetUsername user={user} setUser={setUser} logout={logout}/>}
+        
         </Route>
         {/* <Route exact path="/profile">
           <Profile login={login} />
         </Route> */}
         <Route exact path="/login">
           <Login login={login} />
+        </Route>
+        <Route exact path="/profile">
+          {user && 
+          <ProfilePage user={user} logout={logout}/>}
         </Route>
         <Route exact path="/users">
           {user && 
