@@ -4,6 +4,11 @@ const app = express();
 const apiRoutes = require("./routes/apiRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const notFoundHandler = require("./middleware/notFoundHandler");
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./docs.yaml');
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // USE CORS FOR BUILD
 // const cors = require('cors');
