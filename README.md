@@ -23,21 +23,7 @@ Personal Space is an interactive app that lets the users customize what features
 
 ## Usage
 
-Run the backend server using Node.js.
-
-`node index.js`
-
-Or use nodemon if you don't want to restart the server after every update.
-
-`nodemon index.js`
-
-Run the React app with yarn or npm.
-
-`yarn start`
-
-or
-
-`npm start`
+(Instructions to run Docker files)
 
 - Run tests with `npm run test` in the /backend folder
 
