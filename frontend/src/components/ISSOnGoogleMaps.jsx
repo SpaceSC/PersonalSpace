@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, TrafficLayer, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import customMarker from "../img/iss-marker.png";
 
 function ISSOnGoogleMaps() {
@@ -53,7 +53,6 @@ function ISSOnGoogleMaps() {
       <LoadScript googleMapsApiKey="AIzaSyCtJXTfBMyZbYS1w5MopUzSYWMO9mYFDLw">
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={2}>
           <Marker icon={customMarker} position={center} />
-          <TrafficLayer /> renders traffic info
         </GoogleMap>
       </LoadScript>
     </div>

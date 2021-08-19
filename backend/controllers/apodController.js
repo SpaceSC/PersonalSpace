@@ -11,13 +11,15 @@ const apodHandler = async (date) => {
     );
 
     const data = await response.json();
-
+    console.log(data);
     if (response.status === 400) {
-      return res.status(400).json("Bad request");
+      
+      // throw generates an error
+      throw {status: 400, message: "Bad request"};
     }
 
     if (!response.ok) {
-      return res.status(503).json("Houston, we've had a problem");
+      throw {status: 503, message: "Houston, we've had a problem"};
     }
 
     apod = new Apod({
@@ -35,12 +37,44 @@ const apodHandler = async (date) => {
 
 exports.getToday = async (req, res) => {
   const today = new Date().toJSON().slice(0, 10);
-  const apod = await apodHandler(today);
+  let apod;
+
+  try {
+    apod = await apodHandler(today);
+  } catch (err) {
+    return res.status(err.status).json({message: err.message});
+  }
   res.json(apod);
 };
 
 exports.getByDate = async (req, res) => {
   const { date } = req.params;
-  const apod = await apodHandler(date);
+  let apod;
+
+  try {
+    apod = await apodHandler(date);
+  } catch (err) {
+    return res.status(err.status).json({message: err.message});
+  }
+  res.json(apod);
+};
+
+exports.getRandomApod = async (req, res) => {
+  const minTimestamp = new Date("1995-06-16").getTime();
+  const maxTimestamp = Date.now();
+
+  const randomTimestamp = Math.random() * (maxTimestamp - minTimestamp) + minTimestamp;
+
+  const randomDate = new Date(randomTimestamp).toJSON().slice(0, 10);
+
+  console.log(randomDate);
+  
+  let apod;
+
+  try {
+    apod = await apodHandler(randomDate);
+  } catch (err) {
+    return res.status(err.status).json({message: err.message});
+  }
   res.json(apod);
 };

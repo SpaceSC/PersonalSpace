@@ -21,26 +21,7 @@ function UserList({ user, setUser, logout }) {
       fetchUsers();
   }, [])
   
- 
 
-  // const toggle = async () => {
-  //   const response = await fetch("/api/toggle-api-status", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Authorization": localStorage.getItem('myToken'),
-  //     },
-  //     body: JSON.stringify({ status: !user.apiStatuses.people_in_space, api: "people_in_space" }), // if key is same as value, use it once
-  //     });
-  //     //If token is invalid/expired, log out user
-  //     if(!response.ok) return logout();
-  //   //const data = await response.json();
-
-  //   const data = await response.json();
-
-  //   console.log(data);
-  //   setUsers(data);
-  // };
-  //console.log(user);
   return (
     <div>
       <h2>Users</h2>

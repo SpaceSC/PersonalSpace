@@ -3,32 +3,45 @@ import { useState, useEffect } from "react";
 function Apod({ user, setUser, logout }) {
   const [apod, setApod] = useState(false);
   const [date, setDate] = useState(false);
+  const [message, setMessage] = useState("");
 
-   // set today's date for max date
-  const today = new Date().toJSON().slice(0,10);
-  console.log(today);
+  // set today's date for max date
+  const today = new Date().toJSON().slice(0, 10);
+  //console.log(today);
+
+  const fetchApodWithDate = async (isRandom) => {
+    let url;
+    if (isRandom) {
+      url = "/api/random-apod";
+    } else {
+      url = "/api/apod";
+      if (date && date !== today) {
+        url += "/" + date;
+      }
+    }
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: localStorage.getItem("myToken"),
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+    setMessage(data.message);
+    setApod(false);
+    return
+    }
+      
+
+    setMessage("");
+    setApod(data);
+  };
 
   useEffect(() => {
-    const fetchApodWithDate = async () => {
-      let url =
-      "/api/apod";
-    if (date && date !== today) {
-      url += "/" + date;
-    }
-      const response = await fetch(url, {
-        headers: {
-          Authorization: localStorage.getItem("myToken"),
-        },
-      });
-
-      const data = await response.json();
-
-      //console.log(data);
-
-      setApod(data);
-    };
     fetchApodWithDate();
-  }, [date]);// eslint-disable-line
+  }, [date]); // eslint-disable-line
 
   const toggle = async () => {
     const response = await fetch("/api/toggle-api-status", {
@@ -58,26 +71,24 @@ function Apod({ user, setUser, logout }) {
       <h2>NASA APOD</h2>
       {user.apiStatuses.apod && (
         <div>
+          {message && <p>{message}</p>}
           <p>{apod.title}</p>
           <p>{apod.explanation}</p>
-        <div className="dateContainer">
-          <label htmlFor="pickDate">Pick a day:</label>
-          <input
-            type="date"
-            id="pickDate"
-            name="pickDate"
-            min="1995-06-16"
-            max={today}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        {/*conditional rendering*/}
-        {apod.media_type === "video" && (
-          <iframe width="960" height="540" src={apod.url}></iframe>
-        )}
-        {apod.media_type === "image" && (
-          <img width="560" src={apod.url}></img>
-        )}
+          <div className="dateContainer">
+            <label htmlFor="pickDate">Pick a day:</label>
+            <input
+              type="date"
+              id="pickDate"
+              name="pickDate"
+              min="1995-06-16"
+              max={today}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+          {/*conditional rendering*/}
+          {apod.media_type === "video" && <iframe width="960" height="540" src={apod.url} title="apod"></iframe>}
+          {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
+          <button onClick={() => fetchApodWithDate(true)}>random apod</button>
         </div>
       )}
       <button onClick={toggle}>toggle status</button>

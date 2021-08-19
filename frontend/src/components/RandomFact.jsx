@@ -37,6 +37,8 @@ function RandomFact({ user, setUser, logout }) {
     setUser({ ...user, apiStatuses: { ...user.apiStatuses, random_fact: !user.apiStatuses.random_fact } });
 
     const data = await response.json();
+
+    console.log(data);
   };
   //console.log(user);
   return (

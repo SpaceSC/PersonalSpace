@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
 import PeopleInSpace from "./components/PeopleInSpace";
