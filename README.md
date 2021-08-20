@@ -8,7 +8,7 @@
 
 ## Purpose of the application
 
-Personal Space is an interactive app that lets the users customize what features they want to see after logging in.
+Personal Space is an interactive app that lets users customize what space related features they want to see after logging in.
 
 ## Installation
 
@@ -16,14 +16,36 @@ Personal Space is an interactive app that lets the users customize what features
 - Clone the [Personal Space github repository](https://github.com/SpaceSC/FSAPI-vizsgaremek):
   - `git clone https://github.com/SpaceSC/FSAPI-vizsgaremek`
 
-- You will need [Node Js](https://nodejs.org/en/) installed on your computer.
-
-- Install the frontend and backend dependencies by running `npm install` in the terminal in the /frontend and /backend folders.
+- In the /backend folder copy and paste the .env-template file, rename it to .env, and fill in your data (see comments in file)
+   - Obtain OAuth 2.0 credentials at [Google API Console](https://console.cloud.google.com)
 
 
 ## Usage
 
-(Instructions to run Docker files)
+### As Docker image
+
+- To run docker images you can [Install Docker for your OS](https://docs.docker.com/get-docker/)
+
+- To run docker images on Windows 7 or 8, you can [install](https://devconnected.com/how-to-install-docker-on-windows-7-8-10-home-and-pro/) Docker Toolbox
+
+- Start Docker Desktop (or VirtualBox on Windows 7)
+
+- Build client image with `docker build -t personal-space-client .` in the /frontend folder
+
+- Build server image with `docker build -t personal-space-server .` in the /backend folder 
+
+- In the root folder run `docker-compose up` in your terminal or right click on the file and choose this command in your IDE
+
+- Open http://localhost:3000 in the browser to see the client
+
+- Open http://localhost:5000/api/test in the browser to see if the server is running
+
+- Open http://localhost:5000/docs/ in the browser to see swagger endpoint documentation
+
+### Run with Node.js locally (not as docker image)
+
+- You will need [Node.js](https://nodejs.org/en/) installed on your computer.
+- Install the frontend and backend dependencies by running `npm install` in the terminal in the /frontend and /backend folders.
 
 - Run tests with `npm run test` in the /backend folder
 
