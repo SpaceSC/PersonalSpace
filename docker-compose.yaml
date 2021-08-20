@@ -1,6 +1,8 @@
 version: "3"
 services:
   personal-space-client:
+    build:
+      context: ./frontend
     image: personal-space-client
     stdin_open: true
     ports:
@@ -8,6 +10,8 @@ services:
     networks:
       - mern-app
   personal-space-server:
+    build:
+      context: ./backend
     image: personal-space-server
     ports:
       - "5000:5000"
