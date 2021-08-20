@@ -30,10 +30,6 @@ Personal Space is an interactive app that lets users customize what space relate
 
 - Start Docker Desktop (or VirtualBox on Windows 7)
 
-- Build client image with `docker build -t personal-space-client .` in the /frontend folder
-
-- Build server image with `docker build -t personal-space-server .` in the /backend folder 
-
 - In the root folder run `docker-compose up` in your terminal or right click on the file and choose this command in your IDE
 
 - Open http://localhost:3000 in the browser to see the client
