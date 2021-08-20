@@ -19,8 +19,9 @@ function ISSOnGoogleMaps() {
       setIssLat(data.latitude);
       setIssLong(data.longitude);
     };
+    fetchSatellitesInSpace();
 
-    const interval = setInterval(fetchSatellitesInSpace, 5000);
+    const interval = setInterval(fetchSatellitesInSpace, 2000);
     // cleanup runs when component is not rendered, it stops fetching
     return () => clearInterval(interval);
   }, []);
@@ -30,10 +31,6 @@ function ISSOnGoogleMaps() {
     height: "300px",
   };
 
-  // const center = {
-  //   lat: -17.8,
-  //   lng: 178
-  // };
   const center = {
     lat: Number(issLat),
     lng: Number(issLong),
