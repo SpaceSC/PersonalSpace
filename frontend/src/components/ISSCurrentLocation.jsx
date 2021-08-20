@@ -4,7 +4,7 @@ function ISSCurrentLocation({ user, setUser, logout }) {
   
 
   const toggle = async () => {
-    const response = await fetch("/api/toggle-api-status", {
+    const response = await fetch("http://localhost:5000/api/toggle-api-status", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

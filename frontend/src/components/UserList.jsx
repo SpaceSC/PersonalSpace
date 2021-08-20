@@ -5,7 +5,7 @@ function UserList({ user, setUser, logout }) {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("/api/user-list", {
+      const response = await fetch("http://localhost:5000/api/user-list", {
             headers: {
               "Content-Type": "application/json",
               "Authorization": localStorage.getItem('myToken'),

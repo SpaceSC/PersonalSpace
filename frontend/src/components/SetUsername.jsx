@@ -5,7 +5,7 @@ function SetUsername({ user, setUser, logout }) {
   const [message, setMessage] = useState("");
 
   const postUsername = async () => {
-    const response = await fetch("/api/set-username", {
+    const response = await fetch("http://localhost:5000/api/set-username", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -17,7 +17,7 @@ function DeleteAccount({logout, setDeleteResponse}) {
 
     const fetchData = async () => {
       const myToken = localStorage.getItem("myToken");
-      const response = await fetch("/api/delete-account", {
+      const response = await fetch("http://localhost:5000/api/delete-account", {
         method: "DELETE",
         headers: {
           "Authorization": myToken,
