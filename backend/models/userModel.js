@@ -16,10 +16,10 @@ const userSchema = new mongoose.Schema({
   },
   picture: String,
   email: String,
-  // role: {
-  //   type: String,
-  //   default: "member",
-  // },
+  is_admin: {
+    type: Boolean,
+    default: false,
+  },
   apis: {
     iss_current_location: {
       type: Boolean,

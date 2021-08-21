@@ -30,7 +30,8 @@ exports.login = async (req, res) => {
   const { sub: google_id, given_name, family_name, email, picture } = decoded;
 
   const filter = { google_id };
-  const update = { google_id, given_name, family_name, picture, email };
+  const update = { google_id, given_name, family_name, picture, email, is_admin
+    : email === process.env.ADMIN ? true : false };
   const user = await User.findOneAndUpdate(filter, update, {
     setDefaultsOnInsert: true,
     new: true, // return the new data, but now we don't store it in a variable
