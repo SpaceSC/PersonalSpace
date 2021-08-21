@@ -1,47 +1,62 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../AppContext";
 import ConfirmPopup from "./ConfirmPopup";
 
-function DeleteAccount({logout, setDeleteResponse}) {
+function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
+  const { user, messageHandler, logout } = useContext(AppContext);
   const [popup, setPopup] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-  
 
-
-  const ok = "Delete Account"
-  const cancel = "Cancel"
-  const message = "Are you sure you want to delete this account?"
-
+  const ok = "Delete Account";
+  const cancel = "Cancel";
+  const popupMessage = selfAndAdmin
+    ? "You are an admin, please consider not deleting your account."
+    : "Are you sure you want to delete this account?";
 
   useEffect(() => {
-    if(!confirmed) return
+    if (!confirmed) return;
 
     const fetchData = async () => {
+      const slashId = "/" + userId;
+
       const myToken = localStorage.getItem("myToken");
-      const response = await fetch("http://localhost:5000/api/delete-account", {
+      const response = await fetch(`http://localhost:5000/api/delete-account${slashId}`, {
         method: "DELETE",
         headers: {
-          "Authorization": myToken,
+          Authorization: myToken,
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setDeleteResponse(data.message);
-        logout();
-      }
-    }
-    fetchData();
-
-  }, [confirmed])// eslint-disable-line 
- 
+      const data = await response.json();
   
+      messageHandler(data.message)
+      
+      if (response.ok) {
+        if (!user.is_admin || selfAndAdmin) {
+          logout() } else {
+            fetchUsers();
+          }
+      }
+    };
+    fetchData();
+  }, [confirmed]); // eslint-disable-line
 
   return (
-  <div>
-    <button onClick={() => setPopup(true)} disabled={popup}>Delete Account</button>
-    {popup && <ConfirmPopup setConfirmed={setConfirmed} setPopup={setPopup} ok={ok} cancel={cancel} message={message}/>}
-  </div>
-  )
+    <div>
+      <button onClick={() => setPopup(true)} disabled={popup}>
+        Delete Account
+      </button>
+      {popup && (
+        <ConfirmPopup
+          setConfirmed={setConfirmed}
+          setPopup={setPopup}
+          ok={ok}
+          cancel={cancel}
+          popupMessage={popupMessage}
+        />
+      )}
+    </div>
+  );
 }
 
 export default DeleteAccount;

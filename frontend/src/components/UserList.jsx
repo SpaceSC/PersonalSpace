@@ -1,24 +1,27 @@
 import { useState, useEffect } from "react";
+import DeleteAccount from "./DeleteAccount";
 
 function UserList({ user, setUser, logout }) {
   const [users, setUsers] = useState([]);
 
+  const fetchUsers = async () => {
+    const response = await fetch("http://localhost:5000/api/user-list", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem('myToken'),
+          }
+        });
+
+    const data = await response.json();
+
+     console.log("users", data);
+
+      setUsers(data);
+    };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch("http://localhost:5000/api/user-list", {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": localStorage.getItem('myToken'),
-            }
-          });
-  
-      const data = await response.json();
-  
-       console.log("users", data);
-  
-        setUsers(data);
-      };
-      fetchUsers();
+    fetchUsers();
+      
   }, [])
   
 
@@ -28,8 +31,8 @@ function UserList({ user, setUser, logout }) {
       {user && (
         <div>
           {!users.length && <h6>Loading users...</h6>}
-          {users.map((user, index) => (
-            <p key={index}>{user.given_name}{user.username && ` (${user.username})` }</p>
+          {users.map((listedUser, index) => (
+            <div key={index}>{listedUser.given_name}{listedUser.username && ` (${listedUser.username})` }{user.is_admin && <DeleteAccount user={user} selfAndAdmin={listedUser.google_id === user.google_id} userId={listedUser.google_id} fetchUsers={fetchUsers}/>}</div>
           ))}
         </div>
       )}

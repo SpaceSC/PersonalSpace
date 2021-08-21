@@ -34,11 +34,11 @@ exports.login = async (req, res) => {
     : email === process.env.ADMIN ? true : false };
   const user = await User.findOneAndUpdate(filter, update, {
     setDefaultsOnInsert: true,
-    new: true, // return the new data, but now we don't store it in a variable
+    new: true, // return the new data
     upsert: true, // Make this update into an upsert
   });
 
-  const token = jwt.sign({ google_id, picture, given_name }, process.env.JWT_SECRET); // { expiresIn: '30s' } // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
+  const token = jwt.sign({ google_id, picture, given_name, is_admin: user.is_admin }, process.env.JWT_SECRET); // { expiresIn: '30s' } // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
 
   res.json({ token, apiStatuses: user.apis }); //between {}, token it becomes a key: value pair: token: token
 };
@@ -87,5 +87,14 @@ exports.setUsername = async (req, res) => {
 
 exports.deleteAccount = async (req, res) => {
   const user = await User.findOneAndDelete({ google_id: res.locals.google_id });
+  res.json({ message: `${user.given_name}'s account has been deleted.` });
+};
+
+exports.deleteAccountById = async (req, res) => {
+  const { id } = req.params;
+  if(!res.locals.is_admin) {
+    return res.status(401).json({message: "Unauthorized"});
+  }
+  const user = await User.findOneAndDelete({ google_id: id });
   res.json({ message: `${user.given_name}'s account has been deleted.` });
 };

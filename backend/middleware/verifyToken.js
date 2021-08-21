@@ -7,9 +7,10 @@ module.exports = (req, res, next) => {
   try {
     verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
-    return res.status(401).json("Unauthorized");
+    return res.status(401).json({message: "Unauthorized"});
   }
   //console.log("verified token", verifiedToken);
   res.locals.google_id = verifiedToken.google_id;
+  res.locals.is_admin = verifiedToken.is_admin;
   next();
 };

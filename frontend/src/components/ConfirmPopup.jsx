@@ -1,4 +1,4 @@
-function ConfirmPopup({setConfirmed, setPopup, ok, cancel, message }) {
+function ConfirmPopup({setConfirmed, setPopup, ok, cancel, popupMessage }) {
   
   const handleConfirmed = () => {
   setConfirmed(true)
@@ -7,7 +7,7 @@ function ConfirmPopup({setConfirmed, setPopup, ok, cancel, message }) {
 
   return (
     <div>
-      <p>{message}</p>
+      <p>{popupMessage}</p>
       <button onClick={handleConfirmed}>{ok || "OK"}</button>
       
       <button onClick={() => setPopup(false)}>{cancel || "Cancel"}</button>

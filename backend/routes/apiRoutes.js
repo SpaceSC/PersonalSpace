@@ -28,4 +28,6 @@ router.get("/random-fact", verifyToken, randomFactController.getRandomFact)
 
 router.delete("/delete-account", verifyToken, userController.deleteAccount)
 
+router.delete("/delete-account/:id", verifyToken, userController.deleteAccountById)
+
 module.exports = router
