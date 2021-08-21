@@ -4,45 +4,48 @@ info:
   description: This is the documentation for Personal Space API. In the project, they will need to store and handle users, albums, and images and will have a simple user authentication system (registration, login, logout).
   version: 0.1.9
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:5000
     description: Main (production) server
-security:
-  - BearerAuth: []
+# security:
+#   - BearerAuth: []
 paths:
-  /users:
+  /api/test:
     get:
-      summary: Returns a list of users.
+      summary: Returns a test message
       tags:
         - get
-      description: Returns a list of users, 10 appearing per page.
-      parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 1
+      description: Returns a test message.
+      # parameters:
+      #   - name: page
+      #     in: query
+      #     required: false
+      #     schema:
+      #       type: integer
+      #       default: 1
       responses:
         200:    # status code
-          description: A JSON array of user names
+          description: A JSON with a message
           content:
             application/json:
               schema: 
-                type: array
-                items: 
-                  type: string
-                example: ['John Doe', 'Bob']
-        400:    # status code
-          description: Invalid page query parameter
-          content:
-            application/json:
-              schema: 
+                $ref: '#/components/schemas/Message'
                 type: object
                 properties:
                   message: 
-                    type: string
-                example:
-                  message: Invalid page
+                  type: string
+                example: 
+                  message: My test endpoint
+        # 400:    # status code
+        #   description: Invalid page query parameter
+        #   content:
+        #     application/json:
+        #       schema: 
+        #         type: object
+        #         properties:
+        #           message: 
+        #             type: string
+        #         example:
+        #           message: Invalid page
     post:
       summary: Add a new user as admin
       tags:
@@ -131,3 +134,8 @@ components:
         username:
           type: string
           example: 'Jane Doe'
+    Message:
+      type: object
+      properties:
+        message: 
+        type: string
