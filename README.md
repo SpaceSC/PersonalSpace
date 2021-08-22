@@ -1,5 +1,10 @@
 # Personal Space
 
+![](https://img.shields.io/badge/MongoDB-1.0.0-red)
+![](https://img.shields.io/badge/Mongoose-5.13.5-%237C0A02)
+![](https://img.shields.io/badge/CORS-2.8.5-lightgrey)
+![](https://img.shields.io/badge/Jwt-8.5.1-purple)
+![](https://img.shields.io/badge/Jest-27.0.6-yellowgreen)
 ![](https://img.shields.io/badge/React-17.0.2-blue)
 ![](https://img.shields.io/badge/JavaScript-ES6-yellow)
 ![](https://img.shields.io/badge/Node.js-v13.14.0-darkgreen)

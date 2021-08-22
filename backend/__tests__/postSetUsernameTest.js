@@ -178,7 +178,7 @@ it("checks if a post request to /api/set-username returns status(404) and the me
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/set-username").set({ authorization: token }).send({
+  const response = await request").set({ authorization: token }).send({
     username: "NewUsername",
   });
 
