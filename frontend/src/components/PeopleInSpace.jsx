@@ -48,7 +48,7 @@ function PeopleInSpace({ user, setUser, logout }) {
         </div>
       )}
 
-      <button onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
     </div>
   );
 }

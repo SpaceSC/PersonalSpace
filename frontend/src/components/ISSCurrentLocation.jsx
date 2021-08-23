@@ -32,7 +32,7 @@ function ISSCurrentLocation({ user, setUser, logout }) {
       {user.apiStatuses.iss_current_location && (
         <ISSOnGoogleMaps />
       )}
-      <button onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
     </div>
   );
 }

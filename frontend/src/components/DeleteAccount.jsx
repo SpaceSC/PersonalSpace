@@ -43,7 +43,7 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
 
   return (
     <div>
-      <button onClick={() => setPopup(true)} disabled={popup}>
+      <button className="showMoreBtn" onClick={() => setPopup(true)} disabled={popup}>
         Delete Account
       </button>
       {popup && (

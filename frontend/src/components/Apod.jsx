@@ -88,10 +88,10 @@ function Apod({ user, setUser, logout }) {
           {/*conditional rendering*/}
           {apod.media_type === "video" && <iframe width="960" height="540" src={apod.url} title="apod"></iframe>}
           {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
-          <button onClick={() => fetchApodWithDate(true)}>random apod</button>
+          <button className="showMoreBtn" onClick={() => fetchApodWithDate(true)}>random apod</button>
         </div>
       )}
-      <button onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
     </div>
   );
 }

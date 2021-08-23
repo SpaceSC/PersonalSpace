@@ -51,11 +51,11 @@ function RandomFact({ user, setUser, logout }) {
             <h3>{randomFact.fact}</h3>
             <p>{randomFact.source}</p>
           </div>
-          <button onClick={randomFactFetch}>new fact</button>
+          <button className="showMoreBtn" onClick={randomFactFetch}>new fact</button>
         </div>
       )}
 
-      <button onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
     </div>
   );
 }
