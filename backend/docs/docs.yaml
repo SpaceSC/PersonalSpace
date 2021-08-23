@@ -13,7 +13,7 @@ paths:
     get:
       summary: Returns a test message
       tags:
-        - test
+        - Test
       security: []
       description: Returns a test message.
       responses:
@@ -31,7 +31,7 @@ paths:
     get:
       summary: Returns a random space fact
       tags:
-        - RandomFact
+        - Random Fact
       description: Returns a random space fact.
       responses:
         "200":    # status code
@@ -40,6 +40,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RandomFact'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /apod:
+    get:
+      summary: Returns NASA APOD
+      tags:
+        - APOD
+      description: Returns NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
         "401":
           $ref: '#/components/responses/Unauthorized'
         "500":
@@ -135,6 +152,27 @@ components:
         username:
           type: string
           example: 'Jane Doe'
+    Apod:
+      type: object
+      properties:
+        date: 
+          type: string
+          example: '1995-06-20'
+        explanation: 
+          type: string
+          example: "Today's Picture: June 20, 1995    The Pleiades Star Cluster  Picture Credit: Mount Wilson Observatory  Explanation:  The Pleiades star cluster, M45, is one of the brightest star clusters visible in the northern hemisphere. It consists of many bright, hot stars that were all formed at the same time within a large cloud of interstellar dust and gas. The blue haze that accompanies them is due to very fine dust which still remains and preferentially reflects the blue light from the stars.   We keep an archive of previous Astronomy Pictures of the Day.   Astronomy Picture of the Day is brought to you by  Robert Nemiroff and  Jerry Bonnell . Original material on this page is copyrighted to Robert J. Nemiroff and Jerry T. Bonnell."ű
+        hdurl:
+          type: string
+          example: 'https://apod.nasa.gov/apod/image/pleiades2.gif'
+        media_type: 
+          type: string
+          example: 'image'
+        title: 
+          type: string
+          example: 'Pleiades Star Cluster'
+        url: 
+          type: string
+          example: 'https://apod.nasa.gov/apod/image/pleiades2.gif'
     RandomFact:
       type: object
       properties: 
@@ -173,3 +211,4 @@ components:
               message:
                 type: string
                 example: Unauthorized
+    
