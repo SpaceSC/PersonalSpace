@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("./config/databaseConnect"); // runs databaseConnect
+require("./seeders/randomFactSeeder");
 const app = require("./app");
 const port = 5000;
 

@@ -31,7 +31,6 @@ it("checks if a delete request to /api/delete-account/:id returns status(200) an
 
 it("checks if a delete request to /api/delete-account/:id returns status(401) and message 'Unauthorized' when user is not an admin", async () => {
   // given
-  
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
