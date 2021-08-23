@@ -71,18 +71,6 @@ function App() {
         </div>
         {message && <p>{message}</p>}
         <Switch>
-          {/* <Route exact path="/">
-            {/* {!user && <button onClick={loginAuth}>Login</button>}
-            {user && <button onClick={logout}>Log Out</button>}
-            {user && <RandomFact user={user} setUser={setUser} logout={logout} />}
-            {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
-            {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}
-            {user && <Apod user={user} setUser={setUser} logout={logout} />}
-            {user && <DeleteAccount />} 
-          </Route> */}
-          {/* <Route exact path="/profile">
-          <Profile login={login} />
-        </Route> */}
           <Route exact path="/">
             <HomePage user={user} setUser={setUser} login={login} loginAuth={loginAuth} logout={logout}/>
           </Route>

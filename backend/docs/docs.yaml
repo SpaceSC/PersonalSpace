@@ -27,46 +27,24 @@ paths:
                 My test endpoint:
                   value:
                       message: My test endpoint
-        # 400:    # status code
-        #   description: Invalid page query parameter
-        #   content:
-        #     application/json:
-        #       schema: 
-        #         type: object
-        #         properties:
-        #           message: 
-        #             type: string
-        #         example:
-        #           message: Invalid page
   /random-fact:
     get:
-      summary: Returns a test message
+      summary: Returns a random space fact
       tags:
-        - randomFact
-      # security: []
-      # description: Returns a test message.
+        - RandomFact
+      description: Returns a random space fact.
       responses:
-        200:    # status code
-          description: A JSON with a message
+        "200":    # status code
+          description: A random fact
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/Message'
-              examples: 
-                My test endpoint:
-                  value:
-                      message: My test endpoint
-        # 400:    # status code
-        #   description: Invalid page query parameter
-        #   content:
-        #     application/json:
-        #       schema: 
-        #         type: object
-        #         properties:
-        #           message: 
-        #             type: string
-        #         example:
-        #           message: Invalid page
+              schema:
+                $ref: '#/components/schemas/RandomFact'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+      
   /random-fact2:
     post:
       summary: Add a new user as admin
@@ -152,12 +130,46 @@ components:
       scheme: bearer
   schemas:
     User:
+      type: object
       properties:
         username:
           type: string
           example: 'Jane Doe'
+    RandomFact:
+      type: object
+      properties: 
+        _id:
+          type: string
+          example: "aaaf0baf16a3ad1f3cf1edc7"
+        fact:
+          type: string
+          example: "Uranus is named after the Greek mythological figure Ouranos, the God of the sky."
+        source:
+          type: string
+          example: "fungenerators.com"
     Message:
       type: object
       properties:
         message: 
           type: string
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Internal server error
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Unauthorized

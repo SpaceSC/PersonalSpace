@@ -10,7 +10,7 @@ function ConfirmPopup({setConfirmed, setPopup, ok, cancel, popupMessage }) {
       <p>{popupMessage}</p>
       <button onClick={handleConfirmed}>{ok || "OK"}</button>
       
-      <button onClick={() => setPopup(false)}>{cancel || "Cancel"}</button>
+      <button className="showMoreBtn" onClick={() => setPopup(false)}>{cancel || "Cancel"}</button>
     </div>
   )
 }

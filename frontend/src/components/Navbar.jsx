@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar({ user, logout }) {
   return (
-    <div>
+    <div className="navContainer">
       <div>
         <Link to="/" className="nav-link">
           Home
@@ -29,7 +29,7 @@ function Navbar({ user, logout }) {
           </Link>
         )}
       </div>
-      <div>
+      <div className="userContainer">
         {user && <p>{user.name}</p> }
         {user && <img src={user.picture} alt=""/>}
       </div>
