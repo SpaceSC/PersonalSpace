@@ -24,7 +24,7 @@ it("checks if a delete request to /api/delete-account returns status(200) and th
   const user = await User.findOne({ google_id: 1 });
 
   // when
-  const response = await request.delete("/api/delete-account").set({authorization: token})
+  const response = await request.delete("/api/delete-account").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(200);
@@ -37,8 +37,8 @@ it("checks if a delete request to /api/delete-account returns status(404) and me
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.delete("/api/delete-account").set({authorization: token});
-
+  const response = await request.delete("/api/delete-account").set("Authorization", `Bearer ${token}`)
+  
   // then
   expect(response.status).toBe(404);
   expect(response.body.message).toBe("User not found");

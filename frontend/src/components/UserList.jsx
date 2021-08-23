@@ -8,7 +8,7 @@ function UserList({ user, setUser, logout }) {
     const response = await fetch("http://localhost:5000/api/user-list", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('myToken'),
+            Authorization: `Bearer ${localStorage.getItem("myToken")}`,
           }
         });
 

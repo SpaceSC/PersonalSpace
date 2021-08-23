@@ -4,24 +4,18 @@ info:
   description: This is the documentation for Personal Space API. In the project, they will need to store and handle users, albums, and images and will have a simple user authentication system (registration, login, logout).
   version: 0.1.9
 servers:
-  - url: http://localhost:5000
+  - url: http://localhost:5000/api
     description: Main (production) server
-# security:
-#   - BearerAuth: []
+security:
+  - BearerAuth: []
 paths:
-  /api/test:
+  /test:
     get:
       summary: Returns a test message
       tags:
-        - get
+        - test
+      security: []
       description: Returns a test message.
-      # parameters:
-      #   - name: page
-      #     in: query
-      #     required: false
-      #     schema:
-      #       type: integer
-      #       default: 1
       responses:
         200:    # status code
           description: A JSON with a message
@@ -29,12 +23,10 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/Message'
-                type: object
-                properties:
-                  message: 
-                  type: string
-                example: 
-                  message: My test endpoint
+              examples: 
+                My test endpoint:
+                  value:
+                      message: My test endpoint
         # 400:    # status code
         #   description: Invalid page query parameter
         #   content:
@@ -46,6 +38,36 @@ paths:
         #             type: string
         #         example:
         #           message: Invalid page
+  /random-fact:
+    get:
+      summary: Returns a test message
+      tags:
+        - randomFact
+      # security: []
+      # description: Returns a test message.
+      responses:
+        200:    # status code
+          description: A JSON with a message
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Message'
+              examples: 
+                My test endpoint:
+                  value:
+                      message: My test endpoint
+        # 400:    # status code
+        #   description: Invalid page query parameter
+        #   content:
+        #     application/json:
+        #       schema: 
+        #         type: object
+        #         properties:
+        #           message: 
+        #             type: string
+        #         example:
+        #           message: Invalid page
+  /random-fact2:
     post:
       summary: Add a new user as admin
       tags:
@@ -138,4 +160,4 @@ components:
       type: object
       properties:
         message: 
-        type: string
+          type: string

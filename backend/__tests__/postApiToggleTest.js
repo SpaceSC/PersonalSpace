@@ -26,7 +26,7 @@ it("checks if a post request to toggle api status returns status(404) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/toggle-api-status").set({ authorization: token }).send({
+  const response = await request.post("/api/toggle-api-status").set("Authorization", `Bearer ${token}`).send({
     status: true,
     api: "people_in_space",
   });
@@ -47,7 +47,7 @@ it("checks if a post request to toggle api status returns status(200) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/toggle-api-status").set({ authorization: token }).send({
+  const response = await request.post("/api/toggle-api-status").set("Authorization", `Bearer ${token}`).send({
     status: !apiDefaultStatus,
     api: "people_in_space",
   });
@@ -76,7 +76,7 @@ it("checks if a post request to toggle api status returns status(200) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/toggle-api-status").set({ authorization: token }).send({
+  const response = await request.post("/api/toggle-api-status").set("Authorization", `Bearer ${token}`).send({
     status: true,
     api: "people_in_space",
   });
@@ -105,7 +105,7 @@ it("checks if a post request to toggle api status returns status(200) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/toggle-api-status").set({ authorization: token }).send({
+  const response = await request.post("/api/toggle-api-status").set("Authorization", `Bearer ${token}`).send({
     status: false,
     api: "people_in_space",
   });

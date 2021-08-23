@@ -8,7 +8,7 @@ function ISSCurrentLocation({ user, setUser, logout }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("myToken"),
+        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
       },
       body: JSON.stringify({ status: !user.apiStatuses.iss_current_location, api: "iss_current_location" }), // if key is same as value, use it once
     });

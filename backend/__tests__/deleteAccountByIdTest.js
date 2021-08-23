@@ -22,7 +22,7 @@ it("checks if a delete request to /api/delete-account/:id returns status(200) an
   const token = jwt.sign({ google_id: 1, is_admin: true }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.delete("/api/delete-account/2").set({ authorization: token });
+  const response = await request.delete("/api/delete-account/2").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(200);
@@ -34,7 +34,7 @@ it("checks if a delete request to /api/delete-account/:id returns status(401) an
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.delete("/api/delete-account/2").set({ authorization: token });
+  const response = await request.delete("/api/delete-account/2").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(401);
@@ -47,7 +47,7 @@ it("checks if a delete request to /api/delete-account/:id returns status(404) an
   const token = jwt.sign({ google_id: 1, is_admin: true  }, process.env.JWT_SECRET);
 
   //when
-  const response = await request.delete("/api/delete-account/2").set({ authorization: token });
+  const response = await request.delete("/api/delete-account/2").set("Authorization", `Bearer ${token}`)
 
   //then
   expect(response.status).toBe(404);

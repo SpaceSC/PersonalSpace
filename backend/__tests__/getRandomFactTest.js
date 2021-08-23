@@ -19,7 +19,7 @@ it("checks if a get request to /api/random-fact returns status(200) and a random
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/random-fact").set({authorization: token});
+  const response = await request.get("/api/random-fact").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(200);
@@ -33,7 +33,7 @@ it("checks if a get request to /api/random-fact returns status(404) and the mess
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/random-fact").set({authorization: token});
+  const response = await request.get("/api/random-fact").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(404);

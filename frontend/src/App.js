@@ -19,7 +19,7 @@ function App() {
       if (myToken) {
         const response = await fetch("http://localhost:5000/api/check-logged-in", {
           headers: {
-            Authorization: myToken,
+            Authorization: `Bearer ${localStorage.getItem("myToken")}`,
           },
         });
 

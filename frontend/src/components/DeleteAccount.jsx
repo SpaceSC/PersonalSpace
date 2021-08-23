@@ -23,7 +23,7 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
       const response = await fetch(`http://localhost:5000/api/delete-account${slashId}`, {
         method: "DELETE",
         headers: {
-          Authorization: myToken,
+          Authorization: `Bearer ${localStorage.getItem("myToken")}`,
         },
       });
 

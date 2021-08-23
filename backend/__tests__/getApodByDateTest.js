@@ -32,7 +32,7 @@ it("checks if a get request to /api/apod/:date returns status(200) and a random 
   );
 
   // when
-  const response = await request.get("/api/apod/1995-06-20").set({authorization: token});
+  const response = await request.get("/api/apod/1995-06-20").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(200);
@@ -51,7 +51,7 @@ it("checks if a get request to /api/apod/:date returns returns status(400) when 
   );
 
   // when
-  const response = await request.get("/api/apod/doge").set({authorization: token});
+  const response = await request.get("/api/apod/doge").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(400);
@@ -71,7 +71,7 @@ it("checks if a get request to /api/apod/:date returns status(503) and the messa
   );
 
   // when
-  const response = await request.get("/api/apod/1995-06-19").set({authorization: token});
+  const response = await request.get("/api/apod/1995-06-19").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(503);

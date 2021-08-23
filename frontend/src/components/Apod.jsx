@@ -22,7 +22,7 @@ function Apod({ user, setUser, logout }) {
 
     const response = await fetch(url, {
       headers: {
-        Authorization: localStorage.getItem("myToken"),
+        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
       },
     });
 
@@ -48,7 +48,7 @@ function Apod({ user, setUser, logout }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("myToken"),
+        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
       },
       body: JSON.stringify({ status: !user.apiStatuses.apod, api: "apod" }), // if key is same as value, use it once
     });
@@ -77,6 +77,7 @@ function Apod({ user, setUser, logout }) {
           <div className="dateContainer">
             <label htmlFor="pickDate">Pick a day:</label>
             <input
+              value={apod.date || ""}
               type="date"
               id="pickDate"
               name="pickDate"

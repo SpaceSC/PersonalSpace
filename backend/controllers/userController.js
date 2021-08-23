@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
   const decoded = jwt.decode(data.id_token);
 
   if (!decoded) {
-    return res.status(400).json("Invalid code");
+    return res.status(400).json({message: "Invalid code"});
   }
 
   //console.log(decoded);

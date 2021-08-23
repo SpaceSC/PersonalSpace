@@ -7,6 +7,8 @@ const verifyToken = require("../middleware/verifyToken");
 
 router.get("/test", testController.test);
 
+router.get("/error-test", testController.error500Test);
+
 router.post("/login", userController.login)
 
 router.post("/toggle-api-status", verifyToken, userController.apiStatusToggle)

@@ -32,7 +32,7 @@ it("checks if a get request to /api/random-apod returns status(200) and a random
   );
 
   // when
-  const response = await request.get("/api/random-apod").set({authorization: token});
+  const response = await request.get("/api/random-apod").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(200);
@@ -51,7 +51,7 @@ it("checks if a get request to /api/random-apod returns the err.status when the 
 );
 
   // when
-  const response = await request.get("/api/random-apod").set({authorization: token});
+  const response = await request.get("/api/random-apod").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(400);
@@ -70,7 +70,7 @@ it("checks if a get request to /api/random-apod returns status(503) and the mess
   );
 
   // when
-  const response = await request.get("/api/random-apod").set({authorization: token});
+  const response = await request.get("/api/random-apod").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(503);

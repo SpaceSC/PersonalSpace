@@ -6,7 +6,7 @@ function RandomFact({ user, setUser, logout }) {
   const randomFactFetch = async () => {
     const response = await fetch("http://localhost:5000/api/random-fact", {
       headers: {
-        Authorization: localStorage.getItem("myToken"),
+        Authorization: `Bearer ${localStorage.getItem("myToken")}`
       },
     });
 
@@ -26,7 +26,7 @@ function RandomFact({ user, setUser, logout }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("myToken"),
+        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
       },
       body: JSON.stringify({ status: !user.apiStatuses.random_fact, api: "random_fact" }), // if key is same as value, use it once
     });

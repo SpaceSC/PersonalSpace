@@ -105,7 +105,7 @@ it("checks if a post request to /api/set-username returns status(200) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/set-username").set({ authorization: token }).send({
+  const response = await request.post("/api/set-username").set("Authorization", `Bearer ${token}`).send({
     username: "newusername1",
   });
 
@@ -132,7 +132,7 @@ it("checks if a post request to /api/set-username returns status(406) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/set-username").set({ authorization: token }).send({
+  const response = await request.post("/api/set-username").set("Authorization", `Bearer ${token}`).send({
     username: "ÉÁÍÓŰ",
   });
 
@@ -159,7 +159,7 @@ it("checks if a post request to /api/set-username returns status(400) and messag
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/set-username").set({ authorization: token }).send({
+  const response = await request.post("/api/set-username").set("Authorization", `Bearer ${token}`).send({
     username: "AlreadyTakenUsername",
   });
 
@@ -178,7 +178,7 @@ it("checks if a post request to /api/set-username returns status(404) and the me
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.post("/api/set-username").set({ authorization: token }).send({
+  const response = await request.post("/api/set-username").set("Authorization", `Bearer ${token}`).send({
     username: "NewUsername",
   });
 

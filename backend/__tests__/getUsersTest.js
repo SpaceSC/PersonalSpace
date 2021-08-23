@@ -22,7 +22,7 @@ it("checks if a get request to /api/user-list returns status(200) and all the us
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/user-list").set({authorization: token});
+  const response = await request.get("/api/user-list").set("Authorization", `Bearer ${token}`)
 
   const users = await User.find({});
 
@@ -37,7 +37,7 @@ it("checks if a get request to /api/user-list returns status(404) and message 'U
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/user-list").set({authorization: token});
+  const response = await request.get("/api/user-list").set("Authorization", `Bearer ${token}`)
 
   const users = await User.find({});
 

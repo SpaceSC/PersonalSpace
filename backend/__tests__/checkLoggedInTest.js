@@ -13,7 +13,7 @@ it("checks if a get request to /api/check-logged-in returns status(404) and mess
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/check-logged-in").set({authorization: token});
+  const response = await request.get("/api/check-logged-in").set("Authorization", `Bearer ${token}`)
 
   // then
   expect(response.status).toBe(404);
@@ -35,7 +35,7 @@ it("checks if a get request to /api/check-logged-in  returns status(200) and an 
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request.get("/api/check-logged-in").set({authorization: token})
+  const response = await request.get("/api/check-logged-in").set("Authorization", `Bearer ${token}`)
 
   const user = await User.findOne({ google_id: 1 });
 
