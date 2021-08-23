@@ -51,7 +51,6 @@ exports.checkLoggedIn = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   const users = await User.find({});
-  console.log("code users", users);
   if (Object.keys(users).length === 0) return res.status(404).json({ message: "Users not found" });
   return res.json(users);
 };
@@ -88,6 +87,7 @@ exports.setUsername = async (req, res) => {
 
 exports.deleteAccount = async (req, res) => {
   const user = await User.findOneAndDelete({ google_id: res.locals.google_id });
+  if (!user) return res.status(404).json({ message: "User not found" });
   res.json({ message: `${user.given_name}'s account has been deleted.` });
 };
 
@@ -97,5 +97,6 @@ exports.deleteAccountById = async (req, res) => {
     return res.status(401).json({message: "Unauthorized"});
   }
   const user = await User.findOneAndDelete({ google_id: id });
+  if (!user) return res.status(404).json({ message: "User not found" });
   res.json({ message: `${user.given_name}'s account has been deleted.` });
 };

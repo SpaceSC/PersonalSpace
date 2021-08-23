@@ -136,7 +136,7 @@ it("checks if a post request to /api/set-username returns status(406) and messag
     username: "ÉÁÍÓŰ",
   });
 
-  const user = await User.findOne({ google_id: 1 });
+  await User.findOne({ google_id: 1 });
 
   // then
   expect(response.status).toBe(406);
@@ -152,7 +152,7 @@ it("checks if a post request to /api/set-username returns status(400) and messag
     picture: "P",
     email: "e@m.il",
     "apis.people_in_space": true,
-    username: "AlreadyTakenUsername"
+    username: "AlreadyTakenUsername",
   });
   await newUser.save();
 
@@ -178,11 +178,11 @@ it("checks if a post request to /api/set-username returns status(404) and the me
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
-  const response = await request").set({ authorization: token }).send({
+  const response = await request.post("/api/set-username").set({ authorization: token }).send({
     username: "NewUsername",
   });
 
-  const user = await User.findOne({ google_id: 1 });
+  await User.findOne({ google_id: 1 });
 
   // then
   expect(response.status).toBe(404);
