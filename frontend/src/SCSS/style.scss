@@ -17,6 +17,21 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 
+    .navContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      gap: 1rem;
+
+      .userContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1rem;
+        width: 50px;
+      }
+    }
+
     a {
       margin: 0 10px 0 0;
     }
@@ -64,17 +79,17 @@ body {
 
       .navContainer {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
-        
 
         .userContainer {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: flex-end;
           align-items: center;
           gap: 2rem;
+          width: 100%;
         }
       }
 
