@@ -1,16 +1,12 @@
-import "./App.css";
+import "./SCSS/style.scss";
 import { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
-import PeopleInSpace from "./components/PeopleInSpace";
-import RandomFact from "./components/RandomFact";
-import ISSCurrentLocation from "./components/ISSCurrentLocation";
-import DeleteAccount from "./components/DeleteAccount";
-import Apod from "./components/Apod";
 import UserListPage from "./pages/UserListPage";
 import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -69,24 +65,27 @@ function App() {
 
   return (
     <AppContext.Provider value={{user, messageHandler, logout}}>
-      <div>
-        <div className="App">
+      <div className="app">
+        <div>
           <Navbar user={user} login={login} logout={logout} />
         </div>
         {message && <p>{message}</p>}
         <Switch>
-          <Route exact path="/">
-            {!user && <button onClick={loginAuth}>Login</button>}
+          {/* <Route exact path="/">
+            {/* {!user && <button onClick={loginAuth}>Login</button>}
             {user && <button onClick={logout}>Log Out</button>}
             {user && <RandomFact user={user} setUser={setUser} logout={logout} />}
             {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
             {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}
             {user && <Apod user={user} setUser={setUser} logout={logout} />}
-            {user && <DeleteAccount />}
-          </Route>
+            {user && <DeleteAccount />} 
+          </Route> */}
           {/* <Route exact path="/profile">
           <Profile login={login} />
         </Route> */}
+          <Route exact path="/">
+            <HomePage user={user} setUser={setUser} login={login} loginAuth={loginAuth} logout={logout}/>
+          </Route>
           <Route exact path="/login">
             <Login login={login} />
           </Route>

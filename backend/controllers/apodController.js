@@ -11,7 +11,7 @@ const apodHandler = async (date) => {
     );
 
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     if (response.status === 400) {
       
       // throw generates an error
