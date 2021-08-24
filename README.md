@@ -18,7 +18,7 @@ Personal Space is an interactive app that lets users customize what space relate
 ## Installation
 
 
-- Clone the [Personal Space github repository](https://github.com/SpaceSC/FSAPI-vizsgaremek):
+- Clone the [Personal Space github repository](https://github.com/CodecoolGlobal/fapi-exam-project-2-general-SpaceSC/tree/main):
   - `git clone https://github.com/SpaceSC/FSAPI-vizsgaremek`
 
 - In the /backend folder copy and paste the .env-template file, rename it to .env, and fill in your data (see comments in file)
