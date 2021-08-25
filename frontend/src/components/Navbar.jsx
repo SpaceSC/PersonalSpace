@@ -24,13 +24,13 @@ function Navbar({ user, logout }) {
           </Link>
         )}
         {user && (
-          <Link to="/users" className="nav-link" onClick={logout}>
-            Logout
+          <Link to="/mission" className="nav-link">
+            Mission
           </Link>
         )}
         {user && (
-          <Link to="/mission" className="nav-link">
-            Mission
+          <Link to="/" className="nav-link" onClick={logout}>
+            Logout
           </Link>
         )}
       </div>

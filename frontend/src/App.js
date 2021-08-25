@@ -1,6 +1,6 @@
 import "./SCSS/style.scss";
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
@@ -14,8 +14,6 @@ import Navbar from "./components/Navbar";
 function App() {
   const [user, setUser] = useState(false);
   const [message, setMessage] = useState("");
-
-  let history = useHistory();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -59,7 +57,6 @@ function App() {
   const logout = () => {
     localStorage.removeItem("myToken");
     setUser(false);
-    history.push("/");
   };
 
   const messageHandler = (msg) => {
