@@ -40,7 +40,7 @@ function PeopleInSpace({ user, setUser, logout }) {
     <div>
       <h2>How Many People Are In Space Right Now</h2>
       {user.apiStatuses.people_in_space && (
-        <div>
+        <div className="people">
           {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
           {spacePeople.map((spacePerson, index) => (
             <p key={index}>{spacePerson.name}</p>
@@ -48,7 +48,7 @@ function PeopleInSpace({ user, setUser, logout }) {
         </div>
       )}
 
-      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.people_in_space ? "-" : "+"}</button>
     </div>
   );
 }

@@ -45,8 +45,8 @@ function RandomFact({ user, setUser, logout }) {
     <div>
       <h2>Random fact</h2>
       {user.apiStatuses.random_fact && (
-        <div>
-          <div>
+        <div className="factContainer">
+          <div className="fact">
             {!randomFact && <h6>Loading random fact...</h6>}
             <h3>{randomFact.fact}</h3>
             <p>{randomFact.source}</p>
@@ -55,7 +55,7 @@ function RandomFact({ user, setUser, logout }) {
         </div>
       )}
 
-      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.random_fact ? "-" : "+"}</button>
     </div>
   );
 }

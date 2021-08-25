@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-//import Logout from "./Logout";
+import logo from "../img/logo.png";
 
 function Navbar({ user, logout }) {
   return (
     <div className="navContainer">
-      <div>
+      <div className="navLinkContainer">
+        <Link to="/" className="nav-link">
+          <img id="logo" src={logo} alt="logo"></img>
+        </Link>
         <Link to="/" className="nav-link">
           Home
         </Link>

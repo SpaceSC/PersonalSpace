@@ -70,10 +70,14 @@ function Apod({ user, setUser, logout }) {
     <div>
       <h2>NASA APOD</h2>
       {user.apiStatuses.apod && (
-        <div>
+        <div className="apod">
           {message && <p>{message}</p>}
           <p>{apod.title}</p>
           <p>{apod.explanation}</p>
+          
+          {/*conditional rendering*/}
+          {apod.media_type === "video" && <iframe width="960" height="540" src={apod.url} title="apod"></iframe>}
+          {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
           <div className="dateContainer">
             <label htmlFor="pickDate">Pick a day:</label>
             <input
@@ -86,13 +90,10 @@ function Apod({ user, setUser, logout }) {
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
-          {/*conditional rendering*/}
-          {apod.media_type === "video" && <iframe width="960" height="540" src={apod.url} title="apod"></iframe>}
-          {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
           <button className="showMoreBtn" onClick={() => fetchApodWithDate(true)}>random apod</button>
         </div>
       )}
-      <button className="showMoreBtn" onClick={toggle}>toggle status</button>
+      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.apod ? "-" : "+"}</button>
     </div>
   );
 }

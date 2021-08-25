@@ -3,15 +3,17 @@
 @import "reset";
 
 body {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background-color: $black;
   color: $white;
   font-family: "Roboto", sans-serif;
   padding: 20px;
+
+  p {
+    font-size: 1rem;
+  }
 
   #root {
     height: 100%;
@@ -26,6 +28,15 @@ body {
         flex-direction: column;
         margin-bottom: 1rem;
         gap: 1rem;
+
+        #logo {
+          height: 28px;
+        }
+
+        .navLinkContainer {
+          display: flex;
+          align-items: center;
+        }
 
         .userContainer {
           display: flex;
@@ -48,7 +59,7 @@ body {
       .showMoreBtn {
         background-color: $black;
         color: $white;
-        padding: 0.3rem 0.5rem;
+        padding: 0.3rem 0.8rem;
         margin: 0.6rem;
         border-radius: 5px;
         border: none;
@@ -119,6 +130,18 @@ body {
         .mission {
           line-height: 2rem;
         }
+      }
+
+      .factContainer {
+        .fact {
+          line-height: 2rem;
+        }
+      }
+
+      .people, 
+      .spaceStation,
+      .apod {
+        line-height: 2rem;
       }
 
       .landingPage{

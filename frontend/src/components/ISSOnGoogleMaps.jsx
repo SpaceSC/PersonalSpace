@@ -37,7 +37,7 @@ function ISSOnGoogleMaps() {
   };
   //console.log(user);
   return (
-    <div>
+    <div className="spaceStation">
       {!spaceStation && <h6>Loading Space Station...</h6>}
       {spaceStation && (
         <div>
