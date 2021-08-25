@@ -32,7 +32,7 @@ function UserList({ user, setUser, logout }) {
         <div>
           {!users.length && <h6>Loading users...</h6>}
           {users.map((listedUser, index) => (
-            <div key={index}>{listedUser.given_name}{listedUser.username && ` (${listedUser.username})` }{user.is_admin && <DeleteAccount user={user} selfAndAdmin={listedUser.google_id === user.google_id} userId={listedUser.google_id} fetchUsers={fetchUsers}/>}</div>
+            <div key={index}><img src={listedUser.picture} alt=""/>{listedUser.given_name}{listedUser.username && ` (${listedUser.username})`}{user.is_admin && <DeleteAccount user={user} selfAndAdmin={listedUser.google_id === user.google_id} userId={listedUser.google_id} fetchUsers={fetchUsers}/>}</div>
           ))}
         </div>
       )}
