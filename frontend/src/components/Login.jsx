@@ -28,7 +28,7 @@ function Login({ login }) {
         return history.push("/");
       }
       localStorage.setItem("myToken", data.token);
-      login(data.apiStatuses);
+      login(data.apiStatuses, data.username);
 
       history.push("/"); // can be used in javascript, redirects to home like Link would (inside return), or like Redirect would
     };

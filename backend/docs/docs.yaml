@@ -71,27 +71,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Apod'
+        "400":
+          $ref: '#/components/responses/BadRequest'
         "401":
           $ref: '#/components/responses/Unauthorized'
         "500":
           $ref: '#/components/responses/InternalServerError'
         "503":    # status code
-          description: Service unavailable
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Message'
-              examples: 
-                Houston, we've had a problem:
-                  value:
-                      message: Houston, we've had a problem
-                   
-  /apod/{date}:
+          $ref: '#/components/responses/ServiceNotAvailable'
+  "/apod/{date}":
     get:
-      summary: Returns NASA APOD
+      summary: Returns NASA APOD by date
       tags:
         - APOD
-      description: Returns NASA Astronomy Picture Of the Day.
+      description: Returns NASA Astronomy Picture Of the Day by date.
       parameters:
         - name: date
           in: path # the route parameter in this case
@@ -105,15 +98,108 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Apod'
+        "400":
+          $ref: '#/components/responses/BadRequest'
         "401":
           $ref: '#/components/responses/Unauthorized'
         "500":
           $ref: '#/components/responses/InternalServerError'
-  /random-apod:
+        "503":    # status code
+          $ref: '#/components/responses/ServiceNotAvailable'
+  "/random-apod":
+    get:
+      summary: Returns random NASA APOD
+      tags:
+        - APOD
+      description: Returns random NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+        "503":    # status code
+          $ref: '#/components/responses/ServiceNotAvailable'
+  "/login":
+    post:
+      summary: Google login
+      tags:
+        - User
+      security: []
+      requestBody:
+        description: Login to application with a Google account.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code: 
+                  type: string
+                  description: Google auth code query string from the url [See documentation](https://developers.google.com/identity/protocols/oauth2/openid-connect#exchangecode)
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: Google auth code query string from the url [See documentation](https://developers.google.com/identity/protocols/oauth2/openid-connect#exchangecode)
+                  apiStatuses:
+                    type: object
+                    description: User's api statuses
+                    properties:
+                      iss_current_location:
+                        type: boolean
+                        description: Iss toggle status
+                      people_in_space:
+                        type: boolean
+                        description: People in space toggle status
+                      space_x:
+                        type: boolean
+                        description: Space x toggle status
+                      apod:
+                        type: boolean
+                        description: Apod toggle status
+                      planet_data:
+                        type: boolean
+                        description: Planet data toggle status
+                      mars_photo:
+                        type: boolean
+                        description: Mars photos toggle status
+                      random_fact:
+                        type: boolean
+                        description: Random fact toggle status
+                  username:
+                    type: string
+                    description: Username
+        "400":    # status code
+          description: Invalid code
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Message"
+              examples: 
+                Invalid code:
+                  value:
+                      message: Invalid code
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  "/user-list":
     get:
       summary: Returns NASA APOD
       tags:
-        - APOD
+        - User
       description: Returns NASA Astronomy Picture Of the Day.
       responses:
         "200":    # status code
@@ -126,41 +212,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         "500":
           $ref: '#/components/responses/InternalServerError'
-  /login:
-    post:
-      summary: Add a new user as admin
-      tags:
-        - User
-      requestBody:
-        description: New user object that you would like to store.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        201:
-          description: New user stored in database.
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/User'
-        400:    # status code
-          description: Invalid username
-          content:
-            application/json:
-              schema: 
-                type: object
-                properties:
-                  message: 
-                    type: string
-              examples:
-                InvalidUsername: 
-                  value: 
-                    message: Invalid username
-                NotUniqueUsername: 
-                  value: 
-                    message: Username must be unique
   # /check-logged-in:
   #   get:
   #     summary: Add a new user as admin
@@ -196,23 +247,7 @@ paths:
   #               NotUniqueUsername: 
   #                 value: 
   #                   message: Username must be unique
-  /user-list:
-    get:
-      summary: Returns NASA APOD
-      tags:
-        - User
-      description: Returns NASA Astronomy Picture Of the Day.
-      responses:
-        "200":    # status code
-          description: NASA APOD
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Apod'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "500":
-          $ref: '#/components/responses/InternalServerError'
+  
   /delete-account:
     delete:
       summary: Returns NASA APOD
@@ -284,7 +319,7 @@ paths:
                   value: 
                     message: Username must be unique
   /toggle-api-status:
-    post:
+    patch:
       summary: Add a new user as admin
       tags:
         - User
@@ -318,49 +353,6 @@ paths:
                 NotUniqueUsername: 
                   value: 
                     message: Username must be unique
-                
-  /users/{username}:
-    put:
-      summary: Update usernames.
-      tags:
-        - put
-      parameters:
-        - name: username
-          in: path # the route parameter in this case
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: User object to update user.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        201:
-          description: New user updated in database.
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/User'
-        400:    # status code
-          description: Invalid username
-          content:
-            application/json:
-              schema: 
-                type: object
-                properties:
-                  message: 
-                    type: string
-              examples:
-                InvalidUsername: 
-                  value: 
-                    message: Invalid username
-                NotUniqueUsername: 
-                  value: 
-                    message: Username must be unique
-                
 components:
   securitySchemes:
     BearerAuth:
@@ -385,9 +377,6 @@ components:
         explanation: 
           type: string
           example: "Today's Picture: June 20, 1995    The Pleiades Star Cluster  Picture Credit: Mount Wilson Observatory  Explanation:  The Pleiades star cluster, M45, is one of the brightest star clusters visible in the northern hemisphere. It consists of many bright, hot stars that were all formed at the same time within a large cloud of interstellar dust and gas. The blue haze that accompanies them is due to very fine dust which still remains and preferentially reflects the blue light from the stars.   We keep an archive of previous Astronomy Pictures of the Day.   Astronomy Picture of the Day is brought to you by  Robert Nemiroff and  Jerry Bonnell . Original material on this page is copyrighted to Robert J. Nemiroff and Jerry T. Bonnell."
-        hdurl:
-          type: string
-          example: "https://apod.nasa.gov/apod/image/pleiades2.gif"
         media_type: 
           type: string
           example: "image"
@@ -415,34 +404,53 @@ components:
         message: 
           type: string
   responses:
-    InternalServerError:
-      description: Internal server error
+    BadRequest:
+      description: Bad request
       content:
         application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Internal server error
+          schema: 
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Bad request:
+              value:
+                message: Bad request
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Unauthorized
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Unauthorized:
+              value:
+                message: Unauthorized
     FactNotFound:
       description: Fact not found
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Fact not found
-    
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Fact not found:
+              value:
+                message: Fact not found
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Internal server error:
+              value:
+                message: Internal server error
+    ServiceNotAvailable:
+      description: Service unavailable
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Houston, we've had a problem:
+              value:
+                message: Houston, we've had a problem

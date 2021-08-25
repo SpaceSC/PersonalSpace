@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
 
   const token = jwt.sign({ google_id, picture, given_name, is_admin: user.is_admin }, process.env.JWT_SECRET); // { expiresIn: '30s' } // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
 
-  res.json({ token, apiStatuses: user.apis }); //between {}, token it becomes a key: value pair: token: token
+  res.json({ token, apiStatuses: user.apis, username: user.username }); //between {}, token it becomes a key: value pair: token: token
 };
 
 exports.checkLoggedIn = async (req, res) => {
