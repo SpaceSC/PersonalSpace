@@ -5,6 +5,7 @@ const request = supertest(app);
 it("Returns a message when get request is sent to /api/error-test endpoint", async () => {
   // given
   // app has started
+  console.error = jest.fn(); // mock console error
 
   // when
   const response = await request.get("/api/error-test");

@@ -27,6 +27,16 @@ paths:
                 My test endpoint:
                   value:
                       message: My test endpoint
+  /error-test:
+    get:
+      summary: Returns an Ierror message with status 500
+      tags:
+        - Test
+      security: []
+      description: Returns an Internal server error message with status 500.
+      responses:
+        "500":    # status code
+          $ref: '#/components/responses/InternalServerError'
   /random-fact:
     get:
       summary: Returns a random space fact
@@ -61,12 +71,208 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         "500":
           $ref: '#/components/responses/InternalServerError'
-      
-  /random-fact2:
+  /apod/{date}:
+    get:
+      summary: Returns NASA APOD
+      tags:
+        - APOD
+      description: Returns NASA Astronomy Picture Of the Day.
+      parameters:
+        - name: date
+          in: path # the route parameter in this case
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /random-apod:
+    get:
+      summary: Returns NASA APOD
+      tags:
+        - APOD
+      description: Returns NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /login:
     post:
       summary: Add a new user as admin
       tags:
-        - post
+        - User
+      requestBody:
+        description: New user object that you would like to store.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: New user stored in database.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+        400:    # status code
+          description: Invalid username
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: 
+                    type: string
+              examples:
+                InvalidUsername: 
+                  value: 
+                    message: Invalid username
+                NotUniqueUsername: 
+                  value: 
+                    message: Username must be unique
+  /check-logged-in:
+    get:
+      summary: Add a new user as admin
+      tags:
+        - User
+      requestBody:
+        description: New user object that you would like to store.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: New user stored in database.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+        400:    # status code
+          description: Invalid username
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: 
+                    type: string
+              examples:
+                InvalidUsername: 
+                  value: 
+                    message: Invalid username
+                NotUniqueUsername: 
+                  value: 
+                    message: Username must be unique
+  /user-list:
+    get:
+      summary: Returns NASA APOD
+      tags:
+        - User
+      description: Returns NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /delete-account:
+    delete:
+      summary: Returns NASA APOD
+      tags:
+        - User
+      description: Returns NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /delete-account/{id}:
+    delete:
+      summary: Returns NASA APOD
+      tags:
+        - User
+      description: Returns NASA Astronomy Picture Of the Day.
+      responses:
+        "200":    # status code
+          description: NASA APOD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Apod'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+      
+  /set-username:
+    post:
+      summary: Add a new user as admin
+      tags:
+        - User
+      requestBody:
+        description: New user object that you would like to store.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: New user stored in database.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+        400:    # status code
+          description: Invalid username
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: 
+                    type: string
+              examples:
+                InvalidUsername: 
+                  value: 
+                    message: Invalid username
+                NotUniqueUsername: 
+                  value: 
+                    message: Username must be unique
+  /toggle-api-status:
+    post:
+      summary: Add a new user as admin
+      tags:
+        - User
       requestBody:
         description: New user object that you would like to store.
         required: true

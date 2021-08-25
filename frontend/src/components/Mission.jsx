@@ -9,7 +9,7 @@ function Mission({ user }) {
         <div className="mission">
           <p>{user.given_name}</p>
           <p>
-            Dear {user.username ? user.username : user.given_name},<br/>
+            Dear {user.username ? user.username : user.name},<br/>
             Our mission is to let you create your personal space, where you can access space stuff that you're interested in.
           </p>
         </div>

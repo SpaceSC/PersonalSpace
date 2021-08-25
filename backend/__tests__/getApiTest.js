@@ -5,7 +5,7 @@ const request = supertest(app);
 it("Returns a message when get request is sent to /api/test endpoint", async () => {
   // given
   // app has started
-
+ 
   // when
   const response = await request.get("/api/test");
 
