@@ -8,7 +8,6 @@ function Home({ loginAuth, user, setUser, logout }) {
   
   return (
     <div className="homeContainer">
-      {!user && <button className="showMoreBtn" onClick={loginAuth}>Login</button>}
       {user && <RandomFact user={user} setUser={setUser} logout={logout} />}
       {user && <PeopleInSpace user={user} setUser={setUser} logout={logout} />}
       {user && <ISSCurrentLocation user={user} setUser={setUser} logout={logout} />}

@@ -1,6 +1,6 @@
 import "./SCSS/style.scss";
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
@@ -8,11 +8,14 @@ import UserListPage from "./pages/UserListPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import MissionPage from "./pages/MissionPage";
+import LandingPage from "./pages/LandingPage";
 import Navbar from "./components/Navbar";
 
 function App() {
   const [user, setUser] = useState(false);
   const [message, setMessage] = useState("");
+
+  let history = useHistory();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -56,6 +59,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("myToken");
     setUser(false);
+    history.push("/");
   };
 
   const messageHandler = (msg) => {
@@ -72,8 +76,11 @@ function App() {
           <Navbar user={user} login={login} logout={logout} />
         </div>
         {message && <p>{message}</p>}
+        {/* {!user && <div id="landing"></div>}
+        {!user && <button className="showMoreBtn" onClick={loginAuth}>Login</button>} */}
         <Switch>
           <Route exact path="/">
+            {!user && <LandingPage user={user} loginAuth={loginAuth}/>}
             <HomePage user={user} setUser={setUser} login={login} loginAuth={loginAuth} logout={logout}/>
           </Route>
           <Route exact path="/login">

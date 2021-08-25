@@ -1,6 +1,6 @@
 import Mission from "../components/Mission";
 
-function UserListPage({user, logout}) {
+function MissionPage({user, logout}) {
   return (
     <div>
       <Mission user={user}/>
@@ -8,4 +8,4 @@ function UserListPage({user, logout}) {
   );
 }
 
-export default UserListPage;
+export default MissionPage;
