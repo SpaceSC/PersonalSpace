@@ -31,15 +31,13 @@ it("checks if a get request to /api/user-list returns status(200) and all the us
   expect(JSON.stringify(response.body)).toBe(JSON.stringify(users));
 });
 
-it("checks if a get request to /api/user-list returns status(404) and message 'Users not found' when user is deleted from database after sending the request", async () => {
+it("checks if a get request to /api/user-list returns status(404) and message 'Users not found' when the database is empty", async () => {
   // given
   // user has a token at this point, but is deleted after sending the request
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);
 
   // when
   const response = await request.get("/api/user-list").set("Authorization", `Bearer ${token}`)
-
-  const users = await User.find({});
 
   // then
   expect(response.status).toBe(404);

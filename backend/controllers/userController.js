@@ -50,8 +50,8 @@ exports.checkLoggedIn = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
-  const users = await User.find({});
-  if (Object.keys(users).length === 0) return res.status(404).json({ message: "Users not found" });
+  const users = await User.find({}).select("given_name username");
+  if (!users.length) return res.status(404).json({ message: "Users not found" });
   return res.json(users);
 };
 

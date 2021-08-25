@@ -31,7 +31,7 @@ it("checks if a delete request to /api/delete-account returns status(200) and th
   expect(response.body.message).toBe(`${user.given_name}'s account has been deleted.`);
 });
 
-it("checks if a delete request to /api/delete-account returns status(404) and message 'User not found' when user is deleted from database after sending the request", async () => {
+it("checks if a delete request to /api/delete-account returns status(404) and message 'User not found' when the database is empty", async () => {
   // given
   // user has a token at this point, but is deleted after sending the request
   const token = jwt.sign({ google_id: 1 }, process.env.JWT_SECRET);

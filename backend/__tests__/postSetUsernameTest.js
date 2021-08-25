@@ -88,7 +88,7 @@ it("checks if a post request to /api/set-username returns status(400) and messag
   expect(user.username).toBe("AlreadyTakenUsername");
 });
 
-it("checks if a post request to /api/set-username returns status(404) and the message 'User not found', when the user is deleted from the database after sending the request", async () => {
+it("checks if a post request to /api/set-username returns status(404) and the message 'User not found', when the database is empty", async () => {
   // given
   // user has a token at this point, but is deleted after sending the request
 
@@ -98,8 +98,6 @@ it("checks if a post request to /api/set-username returns status(404) and the me
   const response = await request.post("/api/set-username").set("Authorization", `Bearer ${token}`).send({
     username: "NewUsername",
   });
-
-  await User.findOne({ google_id: 1 });
 
   // then
   expect(response.status).toBe(404);

@@ -41,7 +41,7 @@ it("checks if a delete request to /api/delete-account/:id returns status(401) an
   expect(response.body.message).toBe("Unauthorized");
 });
 
-it("checks if a delete request to /api/delete-account/:id returns status(404) and message 'User not found' when user to be deleted is deleted from database by another authorized person after sending the request", async () => {
+it("checks if a delete request to /api/delete-account/:id returns status(404) and message 'User not found' when the database is empty", async () => {
   //given
 
   const token = jwt.sign({ google_id: 1, is_admin: true  }, process.env.JWT_SECRET);
