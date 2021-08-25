@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import UserListPage from "./pages/UserListPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
+import MissionPage from "./pages/MissionPage";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
 
         if (response.ok) {
           const data = await response.json();
-          return login(data.apiStatuses);
+          return login(data.apiStatuses, data.username);
         }
         if (response.status === 404) logout();
       }
@@ -39,7 +40,7 @@ function App() {
   };
 
   // decode token
-  const login = (apiStatuses) => {
+  const login = (apiStatuses, username) => {
     const decoded = jwt_decode(localStorage.getItem("myToken"));
     setUser({
       google_id: decoded.google_id,
@@ -47,6 +48,7 @@ function App() {
       name: decoded.given_name,
       is_admin: decoded.is_admin,
       apiStatuses: apiStatuses,
+      username: username
     });
     console.log(apiStatuses);
   };
@@ -78,10 +80,13 @@ function App() {
             <Login login={login} />
           </Route>
           <Route exact path="/profile">
-            {user && <ProfilePage user={user} logout={logout} />}
+            {user && <ProfilePage user={user} setUser={setUser} logout={logout} />}
           </Route>
           <Route exact path="/users">
             {user && <UserListPage user={user} logout={logout} />}
+          </Route>
+          <Route exact path="/mission">
+            {user && <MissionPage user={user}/>}
           </Route>
           <Redirect to="/" />
         </Switch>

@@ -28,9 +28,14 @@ function Navbar({ user, logout }) {
             Logout
           </Link>
         )}
+        {user && (
+          <Link to="/mission" className="nav-link">
+            Mission
+          </Link>
+        )}
       </div>
       <div className="userContainer">
-        {user && <p>{user.name}</p> }
+        {user && <p>{user.username ? user.username : user.name}</p> }
         {user && <img src={user.picture} alt=""/>}
       </div>
     </div>

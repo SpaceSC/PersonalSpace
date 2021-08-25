@@ -34,6 +34,11 @@ body {
 
     a {
       margin: 0 10px 0 0;
+      text-decoration: none;
+
+      &:hover {
+        color: $blue;
+      }
     }
 
     .showMoreBtn {
@@ -87,11 +92,20 @@ body {
     .homeContainer {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 3rem;
 
       img, iframe {
         max-width: 100%;
       }
+
+    }
+
+    .setUsernameContainer {
+      display: flex;
+      flex-direction: column;
+      width: 27%;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
     // #loading {

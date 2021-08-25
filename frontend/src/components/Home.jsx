@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import PeopleInSpace from "./PeopleInSpace";
 import RandomFact from "./RandomFact";
 import ISSCurrentLocation from "./ISSCurrentLocation";

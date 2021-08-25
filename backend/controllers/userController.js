@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
 exports.checkLoggedIn = async (req, res) => {
   const user = await User.findOne({ google_id: res.locals.google_id });
   if (!user) return res.status(404).json({ message: "User not found" });
-  res.json({ apiStatuses: user.apis });
+  res.json({ apiStatuses: user.apis, username: user.username });
 };
 
 exports.getUsers = async (req, res) => {
@@ -79,10 +79,15 @@ exports.setUsername = async (req, res) => {
   const filter = { google_id: res.locals.google_id };
   const update = { username };
 
-  const user = await User.findOneAndUpdate(filter, update);
+  const user = await User.findOneAndUpdate(filter, update, {
+    new: true, // return the new data
+    });
+
   if (!user) return res.status(404).json({ message: "User not found" });
 
-  res.json({ message: "Username updated" });
+  const newUsername = user.username;
+
+  res.json({ newUsername, message: "Username updated" });
 };
 
 exports.deleteAccount = async (req, res) => {

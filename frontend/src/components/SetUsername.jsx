@@ -14,8 +14,6 @@ function SetUsername({ user, setUser, logout }) {
       body: JSON.stringify({ username }), // if key is same as value, use it once
       });
       //If token is invalid/expired, log out user
-      
-    //const data = await response.json();
 
     const data = await response.json();
     
@@ -23,23 +21,23 @@ function SetUsername({ user, setUser, logout }) {
     if(response.status === 401) return logout();
     if(response.status === 406) return setMessage(data.message)
 
-    setUser({ ...user, username });
+    setUser({ ...user, username: data.newUsername });
     
     setUsername("");
     setMessage("");
   };
-  //console.log(user);
+  console.log(user);
   return (
     <div>
       {user && (
-        <div>
-          <p>{user.username}</p>
+        <div className="setUsernameContainer">
+          <p>{user.username ? `Current username: ${user.username}` : "You don't have a unique username yet" }</p>
           <p>{message}</p>
           <input type="text" placeholder="New username" value={username} onInput={(e) => setUsername(e.target.value)} />
         </div>
       
       )}
-      <button onClick={postUsername}>Set username</button>
+      <button className="showMoreBtn" onClick={postUsername}>Set username</button>
     </div>
   )
 }
