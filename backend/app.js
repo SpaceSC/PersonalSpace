@@ -12,7 +12,8 @@ const cors = require('cors');
 // express json middleware
 app.use(express.json());
 
-app.use(cors({ origin: "http://localhost:3000" }));
+//app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors()); // to test with swagger
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

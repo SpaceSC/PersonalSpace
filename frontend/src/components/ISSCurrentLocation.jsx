@@ -5,7 +5,7 @@ function ISSCurrentLocation({ user, setUser, logout }) {
 
   const toggle = async () => {
     const response = await fetch("http://localhost:5000/api/toggle-api-status", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("myToken")}`,

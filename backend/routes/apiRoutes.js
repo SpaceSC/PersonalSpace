@@ -11,7 +11,7 @@ router.get("/error-test", testController.error500Test);
 
 router.post("/login", userController.login)
 
-router.post("/toggle-api-status", verifyToken, userController.apiStatusToggle)
+router.patch("/toggle-api-status", verifyToken, userController.apiStatusToggle)
 
 router.post("/set-username", verifyToken, userController.setUsername)
 

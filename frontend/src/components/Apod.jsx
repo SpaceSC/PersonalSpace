@@ -45,7 +45,7 @@ function Apod({ user, setUser, logout }) {
 
   const toggle = async () => {
     const response = await fetch("http://localhost:5000/api/toggle-api-status", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("myToken")}`,
@@ -76,7 +76,7 @@ function Apod({ user, setUser, logout }) {
           <p>{apod.explanation}</p>
           
           {/*conditional rendering*/}
-          {apod.media_type === "video" && <iframe width="960" height="540" src={apod.url} title="apod"></iframe>}
+          {apod.media_type === "video" && <iframe src={apod.url} title="apod"></iframe>}
           {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
           <div className="dateContainer">
             <label htmlFor="pickDate">Pick a day:</label>

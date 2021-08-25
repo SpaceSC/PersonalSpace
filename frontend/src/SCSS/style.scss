@@ -192,6 +192,18 @@ body {
           }
         }
 
+        .homeContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 3rem;
+  
+          img,
+          iframe {
+            height: 540px;
+            width: 960px;
+          }
+        }
+
         // h1 {
         //   font-size: 3rem;
         // }
