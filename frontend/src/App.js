@@ -1,6 +1,6 @@
 import "./SCSS/style.scss";
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
@@ -12,8 +12,11 @@ import LandingPage from "./pages/LandingPage";
 import Navbar from "./components/Navbar";
 
 function App() {
+  let history = useHistory();
   const [user, setUser] = useState(false);
   const [message, setMessage] = useState("");
+
+
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -57,6 +60,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("myToken");
     setUser(false);
+    history.push("/");
   };
 
   const messageHandler = (msg) => {
@@ -67,7 +71,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{user, messageHandler, logout}}>
+    <AppContext.Provider value={{user, setUser, messageHandler, logout}}>
       <div className="app">
         <div>
           <Navbar user={user} login={login} logout={logout} />

@@ -13,6 +13,7 @@ body {
 
   p {
     font-size: 1rem;
+    font-weight: 300;
   }
 
   #root {
@@ -54,6 +55,12 @@ body {
         &:hover {
           color: $blue;
         }
+      }
+
+      #landingLogin {
+        height: 72px;
+        width: 72px;
+        border-radius: 50%;
       }
 
       .showMoreBtn {
@@ -132,27 +139,40 @@ body {
         }
       }
 
-      .factContainer {
-        .fact {
-          line-height: 2rem;
+      .factMain {
+        background-color: $black;
+        color: $white;
+        padding: 0.3rem 0.8rem;
+        margin: 0.6rem;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        filter: drop-shadow(0 0 0.3rem $gray);
+        margin-left: 5px;
+        font-weight: 500;
+        font-size: 1.2rem;
+        .factContainer {
+          .fact {
+            line-height: 2rem;
+          }
         }
       }
 
-      .people, 
+      .people,
       .spaceStation,
       .apod {
         line-height: 2rem;
       }
 
-      .landingPage{
+      .landingPage {
         height: 100%;
-        
+
         .landingContainer {
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-  
+
           #landing {
             height: 160px;
             width: 160px;
@@ -162,8 +182,6 @@ body {
           }
         }
       }
-
-      
     }
   }
 }
@@ -196,7 +214,7 @@ body {
           display: flex;
           flex-direction: column;
           gap: 3rem;
-  
+
           img,
           iframe {
             height: 540px;

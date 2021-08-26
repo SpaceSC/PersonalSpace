@@ -9,7 +9,7 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
 
   const ok = "Delete Account";
   const cancel = "Cancel";
-  const popupMessage = selfAndAdmin
+  const popupMessage = selfAndAdmin || user.is_admin
     ? "You are an admin, please consider not deleting your account."
     : "Are you sure you want to delete this account?";
 
@@ -20,7 +20,7 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
       const slashId = "/" + userId;
 
       const myToken = localStorage.getItem("myToken");
-      const response = await fetch(`http://localhost:5000/api/delete-account${slashId}`, {
+      const response = await fetch(`http://localhost:5000/api/delete-account${userId ? slashId : ""}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("myToken")}`,
@@ -32,10 +32,11 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
       messageHandler(data.message)
       
       if (response.ok) {
-        if (!user.is_admin || selfAndAdmin) {
+        if (!user.is_admin || selfAndAdmin || !userId) {
           logout() } else {
             fetchUsers();
           }
+    
       }
     };
     fetchData();

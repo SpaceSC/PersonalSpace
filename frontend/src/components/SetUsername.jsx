@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DeleteAccount from "./DeleteAccount";
 
 function SetUsername({ user, setUser, logout }) {
   const [username, setUsername] = useState("");
@@ -38,6 +39,7 @@ function SetUsername({ user, setUser, logout }) {
       
       )}
       <button className="showMoreBtn" onClick={postUsername}>Set username</button>
+      {user && <DeleteAccount user={user}/>}
     </div>
   )
 }

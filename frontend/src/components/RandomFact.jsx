@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Toggle from "./Toggle";
 
 function RandomFact({ user, setUser, logout }) {
   const [randomFact, setRandomFact] = useState([]);
@@ -21,28 +22,30 @@ function RandomFact({ user, setUser, logout }) {
     randomFactFetch();
   }, []);
 
-  const toggle = async () => {
-    const response = await fetch("http://localhost:5000/api/toggle-api-status", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
-      },
-      body: JSON.stringify({ status: !user.apiStatuses.random_fact, api: "random_fact" }), // if key is same as value, use it once
-    });
-    //If token is invalid/expired, log out user
-    if (!response.ok) return logout();
-    //const data = await response.json();
+  console.log("random", user);
 
-    setUser({ ...user, apiStatuses: { ...user.apiStatuses, random_fact: !user.apiStatuses.random_fact } });
+  // const toggle = async () => {
+  //   const response = await fetch("http://localhost:5000/api/toggle-api-status", {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("myToken")}`,
+  //     },
+  //     body: JSON.stringify({ status: !user.apiStatuses.random_fact, api: "random_fact" }), // if key is same as value, use it once
+  //   });
+  //   //If token is invalid/expired, log out user
+  //   if (!response.ok) return logout();
+  //   //const data = await response.json();
 
-    const data = await response.json();
+  //   setUser({ ...user, apiStatuses: { ...user.apiStatuses, random_fact: !user.apiStatuses.random_fact } });
 
-    console.log(data);
-  };
+  //   const data = await response.json();
+
+  //   console.log(data);
+  // };
   //console.log(user);
   return (
-    <div>
+    <div className="factMain">
       <h2>Random fact</h2>
       {user.apiStatuses.random_fact && (
         <div className="factContainer">
@@ -55,7 +58,8 @@ function RandomFact({ user, setUser, logout }) {
         </div>
       )}
 
-      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.random_fact ? "-" : "+"}</button>
+      <Toggle />
+      
     </div>
   );
 }

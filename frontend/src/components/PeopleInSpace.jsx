@@ -43,7 +43,7 @@ function PeopleInSpace({ user, setUser, logout }) {
         <div className="people">
           {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
           {spacePeople.map((spacePerson, index) => (
-            <p key={index}>{spacePerson.name}</p>
+            <p key={index}>{spacePerson.name} ({spacePerson.craft})</p>
           ))}
         </div>
       )}
