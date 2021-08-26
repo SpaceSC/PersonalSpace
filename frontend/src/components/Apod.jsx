@@ -77,7 +77,7 @@ function Apod({ user, setUser, logout }) {
           
           {/*conditional rendering*/}
           {apod.media_type === "video" && <iframe src={apod.url} title="apod"></iframe>}
-          {apod.media_type === "image" && <img width="560" src={apod.url} alt=""></img>}
+          {apod.media_type === "image" && <img src={apod.url} alt=""/>}
           <div className="dateContainer">
             <label htmlFor="pickDate">Pick a day:</label>
             <input

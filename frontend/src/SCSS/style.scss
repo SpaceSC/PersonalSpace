@@ -11,6 +11,12 @@ body {
   font-family: "Roboto", sans-serif;
   padding: 20px;
 
+  @media screen and (min-width: 750px) {
+    padding-left: 5%;
+    padding-top: 2%;
+    font-size: 1.2rem;
+  }
+
   p {
     font-size: 1rem;
     font-weight: 300;
@@ -188,9 +194,6 @@ body {
 
 @media screen and (min-width: 750px) {
   body {
-    padding-left: 5%;
-    padding-top: 2%;
-    font-size: 1.2rem;
 
     #root {
       .app {
@@ -215,7 +218,10 @@ body {
           flex-direction: column;
           gap: 3rem;
 
-          img,
+          img {
+            width: 960px;
+          }
+
           iframe {
             height: 540px;
             width: 960px;
