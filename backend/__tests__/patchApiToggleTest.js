@@ -36,7 +36,7 @@ it("checks if a patch request to toggle api status returns status(404) and messa
   expect(response.body.message).toBe("User not found");
 });
 
-it("checks if a patch request to toggle api status returns status(200) and message 'api status updated' when default status is being toggled", async () => {
+it("checks if a patch request to toggle api status returns status(200) and message 'Api status updated' when default status is being toggled", async () => {
   // given
   const newUser = new User({ google_id: 1, given_name: "What", family_name: "Ever", picture: "P", email: "e@m.il" });
   await newUser.save();
@@ -56,12 +56,12 @@ it("checks if a patch request to toggle api status returns status(200) and messa
 
   // then
   expect(response.status).toBe(200);
-  expect(response.body.message).toBe("api status updated");
+  expect(response.body.message).toBe("Api status updated");
   expect(newUser.apis.people_in_space).toBe(apiDefaultStatus);
   expect(user.apis.people_in_space).toBe(!apiDefaultStatus);
 });
 
-it("checks if a patch request to toggle api status returns status(200) and message 'api status updated' when previous status is being toggled from false to true", async () => {
+it("checks if a patch request to toggle api status returns status(200) and message 'Api status updated' when previous status is being toggled from false to true", async () => {
   // given
   const newUser = new User({
     google_id: 1,
@@ -85,12 +85,12 @@ it("checks if a patch request to toggle api status returns status(200) and messa
 
   // then
   expect(response.status).toBe(200);
-  expect(response.body.message).toBe("api status updated");
+  expect(response.body.message).toBe("Api status updated");
   expect(newUser.apis.people_in_space).toBe(false);
   expect(user.apis.people_in_space).toBe(true);
 });
 
-it("checks if a patch request to toggle api status returns status(200) and message 'api status updated' when previous status is being toggled from true to false", async () => {
+it("checks if a patch request to toggle api status returns status(200) and message 'Api status updated' when previous status is being toggled from true to false", async () => {
   // given
   const newUser = new User({
     google_id: 1,
@@ -114,7 +114,7 @@ it("checks if a patch request to toggle api status returns status(200) and messa
 
   // then
   expect(response.status).toBe(200);
-  expect(response.body.message).toBe("api status updated");
+  expect(response.body.message).toBe("Api status updated");
   expect(newUser.apis.people_in_space).toBe(true);
   expect(user.apis.people_in_space).toBe(false);
 });

@@ -125,7 +125,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         "500":
           $ref: '#/components/responses/InternalServerError'
-        "503":    # status code
+        "503":
           $ref: '#/components/responses/ServiceNotAvailable'
   "/login":
     post:
@@ -197,112 +197,170 @@ paths:
           $ref: '#/components/responses/InternalServerError'
   "/user-list":
     get:
-      summary: Returns NASA APOD
+      summary: Returns list of users
       tags:
         - User
-      description: Returns NASA Astronomy Picture Of the Day.
+      description: Returns list of users.
       responses:
-        "200":    # status code
-          description: NASA APOD
+        "200":
+          description: User list
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Apod'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: 2226d1db2f2b830db45ebb6c
+                    given_name:
+                      type: string
+                      example: Jane
+                    username:
+                      type: string
+                      example: Anything
+                    picture:
+                      type: string
+                      example: https://lh3.googleusercontent.com/abc
         "401":
           $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UsersNotFound'
         "500":
           $ref: '#/components/responses/InternalServerError'
-  # /check-logged-in:
-  #   get:
-  #     summary: Add a new user as admin
-  #     tags:
-  #       - User
-  #     requestBody:
-  #       description: New user object that you would like to store.
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/User'
-  #     responses:
-  #       201:
-  #         description: New user stored in database.
-  #         content:
-  #           application/json:
-  #             schema: 
-  #               $ref: '#/components/schemas/User'
-  #       400:    # status code
-  #         description: Invalid username
-  #         content:
-  #           application/json:
-  #             schema: 
-  #               type: object
-  #               properties:
-  #                 message: 
-  #                   type: string
-  #             examples:
-  #               InvalidUsername: 
-  #                 value: 
-  #                   message: Invalid username
-  #               NotUniqueUsername: 
-  #                 value: 
-  #                   message: Username must be unique
-  
-  /delete-account:
+  "/delete-account":
     delete:
-      summary: Returns NASA APOD
+      summary: Deletes user account
       tags:
         - User
-      description: Returns NASA Astronomy Picture Of the Day.
+      description: Deletes user' own account.
       responses:
         "200":    # status code
-          description: NASA APOD
+          description: A JSON with a message
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Apod'
+              schema: 
+                $ref: "#/components/schemas/Message"
+              examples: 
+                Delete account:
+                  value:
+                    message: <deleted user's name>'s account has been deleted.
         "401":
           $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UserNotFound'
         "500":
           $ref: '#/components/responses/InternalServerError'
-  # /delete-account/{id}:
-  #   delete:
-  #     summary: Returns NASA APOD
-  #     tags:
-  #       - User
-  #     description: Returns NASA Astronomy Picture Of the Day.
-  #     responses:
-  #       "200":    # status code
-  #         description: NASA APOD
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/Apod'
-  #       "401":
-  #         $ref: '#/components/responses/Unauthorized'
-  #       "500":
-  #         $ref: '#/components/responses/InternalServerError'
-      
-  /set-username:
+  "/delete-account/{id}":
+    delete:
+      summary: Deletes user account by id
+      tags:
+        - User
+      description: Deletes user account by id.
+      parameters:
+        - name: id
+          in: path # the route parameter in this case
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":    # status code
+          description: A JSON with a message
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Message"
+              examples: 
+                Delete account:
+                  value:
+                    message: <deleted user's name>'s account has been deleted.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UserNotFound'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  "/check-logged-in":
+    get:
+      summary: Check if user has valid token
+      tags:
+        - User
+      description: Check if user has valid token.
+      responses:
+        "200":
+          description: User is logged in
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  apiStatuses:
+                    type: object
+                    description: User's api statuses
+                    properties:
+                      iss_current_location:
+                        type: boolean
+                        description: Iss toggle status
+                      people_in_space:
+                        type: boolean
+                        description: People in space toggle status
+                      space_x:
+                        type: boolean
+                        description: Space x toggle status
+                      apod:
+                        type: boolean
+                        description: Apod toggle status
+                      planet_data:
+                        type: boolean
+                        description: Planet data toggle status
+                      mars_photo:
+                        type: boolean
+                        description: Mars photos toggle status
+                      random_fact:
+                        type: boolean
+                        description: Random fact toggle status
+                  username:
+                    type: string
+                    description: Username
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UserNotFound'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  "/set-username":
     post:
-      summary: Add a new user as admin
+      summary: Set unique username
       tags:
         - User
       requestBody:
-        description: New user object that you would like to store.
+        description: Set unique username.
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Username
+                  example: Fred
       responses:
-        201:
-          description: New user stored in database.
+        "200":
+          description: New username is stored in database.
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/User'
-        400:    # status code
+                type: object
+                properties:
+                  newUsername:
+                    type: string
+                    example: Anything
+                  message:
+                    type: string
+                    example: Username updated
+        "400":
           description: Invalid username
           content:
             application/json:
@@ -314,57 +372,67 @@ paths:
               examples:
                 InvalidUsername: 
                   value: 
-                    message: Invalid username
-                NotUniqueUsername: 
+                    message: Username already taken
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UserNotFound'
+        "406":
+          description: Invalid username
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  message: 
+                    type: string
+              examples:
+                InvalidUsername: 
                   value: 
-                    message: Username must be unique
-  /toggle-api-status:
+                    message: Not acceptable, numbers and English letters only
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  "/toggle-api-status":
     patch:
-      summary: Add a new user as admin
+      summary: Toggle api status
       tags:
         - User
       requestBody:
-        description: New user object that you would like to store.
+        description: Update api status to show / hide components.
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              type: object
+              properties:
+                status:
+                  type: boolean
+                api:
+                  type: string
+                  example: apod
       responses:
-        201:
-          description: New user stored in database.
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/User'
-        400:    # status code
-          description: Invalid username
+        "200":
+          description: Update api status in database to show / hide components.
           content:
             application/json:
               schema: 
                 type: object
                 properties:
-                  message: 
+                  message:
                     type: string
-              examples:
-                InvalidUsername: 
-                  value: 
-                    message: Invalid username
-                NotUniqueUsername: 
-                  value: 
-                    message: Username must be unique
+                    example: Api status updated
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/UserNotFound'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
 components:
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
   schemas:
-    User:
-      type: object
-      properties:
-        username:
-          type: string
-          example: "Jane Doe"
     Apod:
       type: object
       properties:
@@ -434,6 +502,26 @@ components:
             Fact not found:
               value:
                 message: Fact not found
+    UsersNotFound:
+      description: Users not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Users not found:
+              value:
+                message: Users not found
+    UserNotFound:
+      description: User not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Message'
+          examples: 
+            Users not found:
+              value:
+                message: User not found
     InternalServerError:
       description: Internal server error
       content:
