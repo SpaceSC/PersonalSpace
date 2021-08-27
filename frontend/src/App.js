@@ -96,7 +96,9 @@ function App() {
           <Route exact path="/mission">
             {user && <MissionPage user={user}/>}
           </Route>
-          <Redirect to="/" />
+          <Route exact path="*">
+            <h1>404</h1>
+          </Route>
         </Switch>
       </div>
     </AppContext.Provider>
