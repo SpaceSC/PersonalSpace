@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
     upsert: true, // Make this update into an upsert
   });
 
-  const token = jwt.sign({ google_id, picture, given_name, is_admin: user.is_admin }, process.env.JWT_SECRET); // { expiresIn: '30s' } // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
+  const token = jwt.sign({ google_id, picture, given_name, is_admin: user.is_admin }, process.env.JWT_SECRET, { expiresIn: '3600s' }); // { expiresIn: '30s' } // creates jwt signed with mySecret, with payload in {}, user can't use other user access rights
 
   res.json({ token, apiStatuses: user.apis, username: user.username }); //between {}, token it becomes a key: value pair: token: token
 };
