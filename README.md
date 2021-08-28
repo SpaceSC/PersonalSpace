@@ -19,10 +19,14 @@ Personal Space is an interactive app that lets users customize what space relate
 
 
 - Clone the [Personal Space github repository](https://github.com/CodecoolGlobal/fapi-exam-project-2-general-SpaceSC/tree/main):
-  - `git clone https://github.com/SpaceSC/FSAPI-vizsgaremek`
+  - `git clone git@github.com:CodecoolGlobal/fapi-exam-project-2-general-SpaceSC.git`
+- Switch to the `main` branch:
+  - `git switch main`
 
-- In the /backend folder copy and paste the .env-template file, rename it to .env, and fill in your data (see comments in file)
+- In the `/backend` folder copy and paste the `.env-template` file, rename it to `.env`, and fill in your data (see comments in file)
    - Obtain OAuth 2.0 credentials at [Google API Console](https://console.cloud.google.com)
+
+- In the `/frontend` folder copy and paste the `.env-template` file, rename it to `.env`, and fill in your data (see comments in file)
 
 
 ## Usage
@@ -46,18 +50,21 @@ Personal Space is an interactive app that lets users customize what space relate
 ### Run with Node.js locally (not as docker image)
 
 - You will need [Node.js](https://nodejs.org/en/) installed on your computer.
-- Install the frontend and backend dependencies by running `npm install` in the terminal in the /frontend and /backend folders.
+- Install the frontend and backend dependencies by running `npm install` in the terminal in the `/frontend` and `/backend` folders.
 
-- Run tests with `npm run test` in the /backend folder
+- Run tests with `npm run test` in the `/backend` folder
 
 ## Technologies
 
-React  
-JavaScript ES6  
-Node.js  
-Express  
-CORS  
-Sass  
+- React  
+- JavaScript ES6  
+- Node.js  
+- Express  
+- MongoDB  
+- Mongoose  
+- Jest
+- CORS  
+- Sass  
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

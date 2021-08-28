@@ -16,8 +16,6 @@ function App() {
   const [user, setUser] = useState(false);
   const [message, setMessage] = useState("");
 
-
-
   useEffect(() => {
     const checkLoggedIn = async () => {
       const myToken = localStorage.getItem("myToken");
@@ -40,7 +38,7 @@ function App() {
 
   // redirects browser to url
   const loginAuth = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=531055017285-g439thvkf4n03d55vu40aoi1a62sn0rd.apps.googleusercontent.com&scope=openid%20email%20profile&redirect_uri=http%3A//localhost:3000/login&prompt=select_account`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${encodeURIComponent(process.env.REACT_APP_CLIENT_ID)}&scope=openid%20email%20profile&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}&prompt=select_account`;
   };
 
   // decode token
@@ -52,7 +50,7 @@ function App() {
       name: decoded.given_name,
       is_admin: decoded.is_admin,
       apiStatuses: apiStatuses,
-      username: username
+      username: username,
     });
     console.log(apiStatuses);
   };
@@ -68,10 +66,10 @@ function App() {
     setTimeout(() => {
       setMessage("");
     }, 5000);
-  }
+  };
 
   return (
-    <AppContext.Provider value={{user, setUser, messageHandler, logout}}>
+    <AppContext.Provider value={{ user, setUser, messageHandler, logout }}>
       <div className="app">
         <div>
           <Navbar user={user} login={login} logout={logout} />
@@ -81,8 +79,8 @@ function App() {
         {!user && <button className="showMoreBtn" onClick={loginAuth}>Login</button>} */}
         <Switch>
           <Route exact path="/">
-            {!user && <LandingPage user={user} loginAuth={loginAuth}/>}
-            <HomePage user={user} setUser={setUser} login={login} loginAuth={loginAuth} logout={logout}/>
+            {!user && <LandingPage user={user} loginAuth={loginAuth} />}
+            <HomePage user={user} setUser={setUser} login={login} loginAuth={loginAuth} logout={logout} />
           </Route>
           <Route exact path="/login">
             <Login login={login} />
@@ -94,7 +92,7 @@ function App() {
             {user && <UserListPage user={user} logout={logout} />}
           </Route>
           <Route exact path="/mission">
-            {user && <MissionPage user={user}/>}
+            {user && <MissionPage user={user} />}
           </Route>
           <Route exact path="*">
             <h1>404</h1>
