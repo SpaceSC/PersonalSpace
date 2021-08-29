@@ -36,7 +36,16 @@ const apodHandler = async (date) => {
 }
 
 exports.getToday = async (req, res) => {
-  const today = new Date().toJSON().slice(0, 10);
+  // const today = new Date().toJSON().slice(0, 10);
+
+  var dt = new Date();
+
+  dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
+
+  var offset = -240;
+  var edtDate = new Date(dt.getTime() + offset*60*1000);
+  
+  const today = edtDate.toJSON().slice(0, 10);
   let apod;
 
   try {
