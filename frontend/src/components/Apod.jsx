@@ -80,7 +80,7 @@ function Apod({ user, setUser, logout }) {
       {user.apiStatuses.apod && (
         <div className="apod">
           {message && <p>{message}</p>}
-          <p>{apod.title}</p>
+          <h3>{apod.title}</h3>
           <p>{apod.explanation}</p>
           
           {/*conditional rendering*/}

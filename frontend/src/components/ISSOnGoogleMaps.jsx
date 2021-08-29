@@ -41,10 +41,10 @@ function ISSOnGoogleMaps() {
       {!spaceStation && <h6>Loading Space Station...</h6>}
       {spaceStation && (
         <div>
-          <p>{spaceStation.name}</p>
+          <p>Name: {spaceStation.name.toUpperCase()}</p>
           <p>NORAD ID: {spaceStation.id}</p>
-          <p>{spaceStation.latitude}</p>
-          <p>{spaceStation.longitude}</p>
+          <p>Latitude: {spaceStation.latitude}</p>
+          <p>Longitude: {spaceStation.longitude}</p>
         </div>
       )}
       <LoadScript googleMapsApiKey="AIzaSyCtJXTfBMyZbYS1w5MopUzSYWMO9mYFDLw">
