@@ -133,18 +133,30 @@ body {
           margin-bottom: 2rem;
         }
 
+        .apiDescription {
+          color: $gray;
+          font-weight: 400;
+          margin-bottom: 3rem;
+        }
+
+        .apodMain {
+          width: 100%;
+
+          .apodContainer {
+
+            p {
+              line-height: 1.2rem;
+              text-align: justify;
+            }
+          }
+        }
+
         .peopleMain {
           width: 100%;
 
           .peopleContainer {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
-
-            .peopleDescription {
-              color: $gray;
-              font-weight: 400;
-            }
 
             .lists {
               display: flex;

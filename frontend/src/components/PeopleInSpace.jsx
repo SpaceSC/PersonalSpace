@@ -24,7 +24,7 @@ function PeopleInSpace({ user }) {
       </div>
       {user.apiStatuses.people_in_space && (
         <div className="peopleContainer">
-          <h3 className="peopleDescription">How Many People Are On Space Stations Right Now</h3>
+          <h3 className="apiDescription">How Many People Are On Space Stations Right Now</h3>
           <div className="lists">
             {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
             <div className="peopleIss station">

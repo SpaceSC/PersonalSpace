@@ -60,10 +60,10 @@ function Apod({ user, setUser, logout }) {
         <Toggle apiName={apiName} />
       </div>
       {user.apiStatuses.apod && (
-        <div className="apod">
+        <div className="apodContainer">
           {message && <p>{message}</p>}
-          <h3>{apod.title}</h3>
-          <p>{apod.explanation}</p>
+          <h3 className="apiDescription">{apod.title}</h3>
+          <p className="apodText">{apod.explanation}</p>
           
           {/*conditional rendering*/}
           {apod.media_type === "video" && <iframe src={apod.url} title="apod"></iframe>}
