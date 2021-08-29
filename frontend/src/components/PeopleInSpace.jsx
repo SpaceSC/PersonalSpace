@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import Toggle from "./Toggle";
 
-function PeopleInSpace({ user, setUser, logout }) {
+function PeopleInSpace({ user }) {
   const [spacePeople, setSpacePeople] = useState([]);
   const apiName = "people_in_space";
- 
-
 
   useEffect(() => {
     const peopleInSpaceFetch = async () => {
@@ -19,17 +17,33 @@ function PeopleInSpace({ user, setUser, logout }) {
   }, []);
 
   return (
-    <div>
+    <div className="peopleMain">
       <div className="titleContainer">
-        <h2>How Many People Are In Space Right Now</h2>
+        <h2>People In Space</h2>
         <Toggle apiName={apiName} />
       </div>
       {user.apiStatuses.people_in_space && (
-        <div className="people">
-          {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
-          {spacePeople.map((spacePerson, index) => (
-            <p key={index}>{spacePerson.name} ({spacePerson.craft})</p>
-          ))}
+        <div className="peopleContainer">
+          <h3 className="peopleDescription">How Many People Are On Space Stations Right Now</h3>
+          <div className="lists">
+            {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
+            <div className="peopleIss station">
+              <div className="craft">ISS</div>
+              {spacePeople
+                .filter((spacePerson) => spacePerson.craft === "ISS")
+                .map((spacePerson, index) => (
+                  <p key={index}>{spacePerson.name}</p>
+                ))}
+            </div>
+            <div className="peopleTiangong station">
+              <div className="craft">Tiangong</div>
+              {spacePeople
+                .filter((spacePerson) => spacePerson.craft === "Tiangong")
+                .map((spacePerson, index) => (
+                  <p key={index}>{spacePerson.name}</p>
+                ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
