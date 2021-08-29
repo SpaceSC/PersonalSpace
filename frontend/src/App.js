@@ -38,7 +38,11 @@ function App() {
 
   // redirects browser to url
   const loginAuth = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${encodeURIComponent(process.env.REACT_APP_CLIENT_ID)}&scope=openid%20email%20profile&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}&prompt=select_account`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${encodeURIComponent(
+      process.env.REACT_APP_CLIENT_ID
+    )}&scope=openid%20email%20profile&redirect_uri=${encodeURIComponent(
+      process.env.REACT_APP_REDIRECT_URI
+    )}&prompt=select_account`;
   };
 
   // decode token
@@ -71,12 +75,9 @@ function App() {
   return (
     <AppContext.Provider value={{ user, setUser, messageHandler, logout }}>
       <div className="app">
-        <div>
-          <Navbar user={user} login={login} logout={logout} />
-        </div>
+        <Navbar user={user} login={login} logout={logout} />
         {message && <p>{message}</p>}
-        {/* {!user && <div id="landing"></div>}
-        {!user && <button className="showMoreBtn" onClick={loginAuth}>Login</button>} */}
+
         <Switch>
           <Route exact path="/">
             {!user && <LandingPage user={user} loginAuth={loginAuth} />}

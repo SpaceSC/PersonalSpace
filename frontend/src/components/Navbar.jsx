@@ -17,7 +17,7 @@ function Navbar({ user, logout }) {
         </Link>
         )}
         {!user && (
-          <a href="https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=531055017285-g439thvkf4n03d55vu40aoi1a62sn0rd.apps.googleusercontent.com&scope=openid%20email%20profile&redirect_uri=http%3A//localhost:3000/login&prompt=select_account" className="nav-link">
+          <a href={`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${encodeURIComponent(process.env.REACT_APP_CLIENT_ID)}&scope=openid%20email%20profile&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}&prompt=select_account`} className="nav-link">
             Login
           </a>
         )}

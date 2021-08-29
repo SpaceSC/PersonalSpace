@@ -3,18 +3,17 @@
 @import "reset";
 
 body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  width: 100%;
+  max-width: 1200px;
   background-color: $black;
   color: $white;
   font-family: "Roboto", sans-serif;
   padding: 20px;
+  margin: 0 auto;
 
   @media screen and (min-width: 750px) {
-    padding-left: 5%;
-    padding-top: 2%;
     font-size: 1.2rem;
+    padding: 30px;
   }
 
   p {
@@ -27,14 +26,20 @@ body {
 
     .app {
       height: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
 
       .navContainer {
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
         gap: 1rem;
+
+        @media screen and (min-width: 750px) {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          height: 50px;
+        }
 
         #logo {
           height: 28px;
@@ -51,10 +56,25 @@ body {
           justify-content: flex-start;
           gap: 1rem;
           width: 50px;
+
+          @media screen and (min-width: 750px) {
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2rem;
+            height: 50px;
+          }
+
+          img {
+            @media screen and (min-width: 750px) {
+              max-height: 100%;
+            }
+          }
         }
       }
 
       a {
+        color: $white;
         margin: 0 10px 0 0;
         text-decoration: none;
 
@@ -118,10 +138,24 @@ body {
         display: flex;
         flex-direction: column;
         gap: 3rem;
+        margin-bottom: 1rem;
 
         img,
         iframe {
           max-width: 100%;
+        }
+
+        img {
+          @media screen and (min-width: 750px) {
+            width: 960px;
+          }
+        }
+
+        iframe {
+          @media screen and (min-width: 750px) {
+            height: 540px;
+            width: 960px;
+          }
         }
 
         .titleContainer {
@@ -143,7 +177,6 @@ body {
           width: 100%;
 
           .apodContainer {
-
             p {
               line-height: 1.2rem;
               text-align: justify;
@@ -231,20 +264,14 @@ body {
       }
 
       .factMain {
-        background-color: $black;
-        color: $white;
-        padding: 0.3rem 0.8rem;
-        margin: 0.6rem;
-        border-radius: 5px;
-        border: none;
-        outline: none;
-        filter: drop-shadow(0 0 0.3rem $gray);
-        margin-left: 5px;
-        font-weight: 500;
-        font-size: 1.2rem;
         .factContainer {
           .fact {
             line-height: 2rem;
+            
+             p {
+              text-align: right;
+              color: $gray;
+             }
           }
         }
       }
@@ -264,74 +291,22 @@ body {
           justify-content: center;
           align-items: center;
 
+          @media screen and (min-width: 750px) {
+            height: 100%;
+            gap: 3rem;
+          }
+
           #landing {
             height: 160px;
             width: 160px;
             background-image: url("../img/loadingSmall.gif");
             background-repeat: no-repeat;
             object-fit: contain;
+
+            @media screen and (min-width: 750px) {
+              background-image: url("../img/loading.gif");
+            }
           }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 750px) {
-  body {
-    #root {
-      .app {
-        .navContainer {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-
-          .userContainer {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
-          }
-        }
-
-        .homeContainer {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
-
-          img {
-            width: 960px;
-          }
-
-          iframe {
-            height: 540px;
-            width: 960px;
-          }
-        }
-
-        // h1 {
-        //   font-size: 3rem;
-        // }
-        // .showMoreBtn {
-        //   background-color: $black;
-        //   color: $white;
-        //   border: none;
-        //   outline: none;
-        //   margin-left: 5px;
-        //   font-weight: 500;
-        //   font-size: 1.2rem;
-        // }
-      }
-
-      .landingContainer {
-        height: 100%;
-        gap: 3rem;
-
-        #landing {
-          background-image: url("../img/loading.gif");
         }
       }
     }
