@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import DeleteAccount from "./DeleteAccount";
+import FilterUsers from "./FilterUsers";
 
 function UserList({ user, setUser, logout }) {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const fetchUsers = async () => {
     const response = await fetch("http://localhost:5000/api/user-list", {
@@ -17,6 +19,7 @@ function UserList({ user, setUser, logout }) {
      console.log("users", data);
 
       setUsers(data);
+      setFilteredUsers(data);
     };
 
   useEffect(() => {
@@ -30,8 +33,10 @@ function UserList({ user, setUser, logout }) {
       <h2>Users</h2>
       {user && (
         <div>
+          <FilterUsers users={users} setFilteredUsers={setFilteredUsers}/>
           {!users.length && <h6>Loading users...</h6>}
-          {users.map((listedUser, index) => (
+          {!filteredUsers.length && <h6>No such user found in the database</h6>}
+          {filteredUsers.map((listedUser, index) => (
             <div key={index}><img src={listedUser.picture} alt=""/>{listedUser.given_name}{listedUser.username && ` (${listedUser.username})`}{user.is_admin && <DeleteAccount user={user} selfAndAdmin={listedUser.google_id === user.google_id} userId={listedUser.google_id} fetchUsers={fetchUsers}/>}</div>
           ))}
         </div>
