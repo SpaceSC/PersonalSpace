@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import Toggle from "./Toggle";
 
 function Apod({ user, setUser, logout }) {
   const [apod, setApod] = useState(false);
   const [date, setDate] = useState(false);
   const [message, setMessage] = useState("");
+  const apiName = "apod";
 
   // set today's date for max date
   // const today = new Date().toJSON().slice(0, 10);
@@ -51,32 +53,12 @@ function Apod({ user, setUser, logout }) {
     fetchApodWithDate();
   }, [date]); // eslint-disable-line
 
-  const toggle = async () => {
-    const response = await fetch("http://localhost:5000/api/toggle-api-status", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
-      },
-      body: JSON.stringify({ status: !user.apiStatuses.apod, api: "apod" }), // if key is same as value, use it once
-    });
-    //If token is invalid/expired, log out user
-    if (!response.ok) return logout();
-    //const data = await response.json();
-
-    setUser({
-      ...user,
-      apiStatuses: { ...user.apiStatuses, apod: !user.apiStatuses.apod },
-    });
-
-    const data = await response.json();
-
-    console.log(data);
-  };
-  //console.log(user);
   return (
-    <div>
+    <div className="apodMain">
+      <div className="titleContainer">
       <h2>NASA APOD</h2>
+        <Toggle apiName={apiName} />
+      </div>
       {user.apiStatuses.apod && (
         <div className="apod">
           {message && <p>{message}</p>}
@@ -101,7 +83,6 @@ function Apod({ user, setUser, logout }) {
           <button className="showMoreBtn" onClick={() => fetchApodWithDate(true)}>random apod</button>
         </div>
       )}
-      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.apod ? "-" : "+"}</button>
     </div>
   );
 }

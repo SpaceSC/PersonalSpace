@@ -28,7 +28,7 @@ it("checks if a get request to /api/user-list returns status(200) and all the us
 
   // then
   expect(response.status).toBe(200);
-  expect(JSON.stringify(response.body[0])).toBe(JSON.stringify({_id: users[0]._id, given_name: users[0].given_name, picture: users[0].picture}));
+  expect(JSON.stringify(response.body[0])).toBe(JSON.stringify({_id: users[0]._id, given_name: users[0].given_name, picture: users[0].picturei}));
 });
 
 it("checks if a get request to /api/user-list returns status(404) and message 'Users not found' when the database is empty", async () => {

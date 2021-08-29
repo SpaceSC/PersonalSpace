@@ -19,7 +19,7 @@ body {
 
   p {
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   #root {
@@ -124,6 +124,13 @@ body {
         img,
         iframe {
           max-width: 100%;
+        }
+
+        .titleContainer {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 2rem;
         }
       }
 

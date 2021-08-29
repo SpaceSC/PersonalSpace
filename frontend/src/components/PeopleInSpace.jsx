@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import Toggle from "./Toggle";
 
 function PeopleInSpace({ user, setUser, logout }) {
   const [spacePeople, setSpacePeople] = useState([]);
+  const apiName = "people_in_space";
+ 
+
 
   useEffect(() => {
     const peopleInSpaceFetch = async () => {
@@ -9,36 +13,17 @@ function PeopleInSpace({ user, setUser, logout }) {
 
       const data = await response.json();
 
-     //console.log(data);
-
       setSpacePeople(data.people);
     };
     peopleInSpaceFetch();
   }, []);
 
-  const toggle = async () => {
-    const response = await fetch("http://localhost:5000/api/toggle-api-status", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("myToken")}`,
-      },
-      body: JSON.stringify({ status: !user.apiStatuses.people_in_space, api: "people_in_space" }), // if key is same as value, use it once
-      });
-      //If token is invalid/expired, log out user
-      if(!response.ok) return logout();
-    //const data = await response.json();
-
-    setUser({ ...user, apiStatuses: { ...user.apiStatuses, people_in_space: !user.apiStatuses.people_in_space } });
-
-    const data = await response.json();
-
-    console.log(data);
-  };
-  //console.log(user);
   return (
     <div>
-      <h2>How Many People Are In Space Right Now</h2>
+      <div className="titleContainer">
+        <h2>How Many People Are In Space Right Now</h2>
+        <Toggle apiName={apiName} />
+      </div>
       {user.apiStatuses.people_in_space && (
         <div className="people">
           {!spacePeople.length && <h6>Loading PeopleInSpace...</h6>}
@@ -47,8 +32,6 @@ function PeopleInSpace({ user, setUser, logout }) {
           ))}
         </div>
       )}
-
-      <button className="showMoreBtn" onClick={toggle}>{user.apiStatuses.people_in_space ? "-" : "+"}</button>
     </div>
   );
 }
