@@ -267,11 +267,11 @@ body {
         .factContainer {
           .fact {
             line-height: 2rem;
-            
-             p {
+
+            p {
               text-align: right;
               color: $gray;
-             }
+            }
           }
         }
       }
@@ -290,10 +290,10 @@ body {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          gap: 3rem;
 
           @media screen and (min-width: 750px) {
             height: 100%;
-            gap: 3rem;
           }
 
           #landing {
@@ -302,8 +302,11 @@ body {
             background-image: url("../img/loadingSmall.gif");
             background-repeat: no-repeat;
             object-fit: contain;
+            background-position: center;
 
             @media screen and (min-width: 750px) {
+              height: 280px;
+              width: 280px;
               background-image: url("../img/loading.gif");
             }
           }
