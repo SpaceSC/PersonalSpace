@@ -154,32 +154,9 @@ paths:
                 properties:
                   token:
                     type: string
-                    description: Google auth code query string from the url [See documentation](https://developers.google.com/identity/protocols/oauth2/openid-connect#exchangecode)
+                    description: JWT token with user info
                   apiStatuses:
-                    type: object
-                    description: User's api statuses
-                    properties:
-                      iss_current_location:
-                        type: boolean
-                        description: Iss toggle status
-                      people_in_space:
-                        type: boolean
-                        description: People in space toggle status
-                      space_x:
-                        type: boolean
-                        description: Space x toggle status
-                      apod:
-                        type: boolean
-                        description: Apod toggle status
-                      planet_data:
-                        type: boolean
-                        description: Planet data toggle status
-                      mars_photo:
-                        type: boolean
-                        description: Mars photos toggle status
-                      random_fact:
-                        type: boolean
-                        description: Random fact toggle status
+                    $ref: "#/components/schemas/ApiStatuses"
                   username:
                     type: string
                     description: Username
@@ -296,30 +273,7 @@ paths:
                 type: object
                 properties:
                   apiStatuses:
-                    type: object
-                    description: User's api statuses
-                    properties:
-                      iss_current_location:
-                        type: boolean
-                        description: Iss toggle status
-                      people_in_space:
-                        type: boolean
-                        description: People in space toggle status
-                      space_x:
-                        type: boolean
-                        description: Space x toggle status
-                      apod:
-                        type: boolean
-                        description: Apod toggle status
-                      planet_data:
-                        type: boolean
-                        description: Planet data toggle status
-                      mars_photo:
-                        type: boolean
-                        description: Mars photos toggle status
-                      random_fact:
-                        type: boolean
-                        description: Random fact toggle status
+                    $ref: "#/components/schemas/ApiStatuses"
                   username:
                     type: string
                     description: Username
@@ -471,6 +425,31 @@ components:
       properties:
         message: 
           type: string
+    ApiStatuses:
+      type: object
+      description: User's api statuses
+      properties:
+        iss_current_location:
+          type: boolean
+          description: Iss toggle status
+        people_in_space:
+          type: boolean
+          description: People in space toggle status
+        space_x:
+          type: boolean
+          description: Space x toggle status
+        apod:
+          type: boolean
+          description: Apod toggle status
+        planet_data:
+          type: boolean
+          description: Planet data toggle status
+        mars_photo:
+          type: boolean
+          description: Mars photos toggle status
+        random_fact:
+          type: boolean
+          description: Random fact toggle status
   responses:
     BadRequest:
       description: Bad request
