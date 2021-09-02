@@ -65,9 +65,11 @@ function Apod({ user, setUser, logout }) {
           <h3 className="apiDescription">{apod.title}</h3>
           <p className="apodText">{apod.explanation}</p>
           
-          {/*conditional rendering*/}
-          {apod.media_type === "video" && <iframe src={apod.url} title="apod"></iframe>}
-          {apod.media_type === "image" && <img src={apod.url} alt=""/>}
+          <div className="imgWrapper">
+            {/*conditional rendering*/}
+            {apod.media_type === "video" && <iframe src={apod.url} title="apod"></iframe>}
+            {apod.media_type === "image" && <img src={apod.url} alt=""/>}
+          </div>
           <div className="dateContainer">
             <label htmlFor="pickDate">Pick a day:</label>
             <input

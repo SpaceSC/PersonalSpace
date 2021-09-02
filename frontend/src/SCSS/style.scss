@@ -4,7 +4,7 @@
 
 body {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   background-color: $black;
   color: $white;
   font-family: "Roboto", sans-serif;
@@ -13,7 +13,7 @@ body {
 
   @media screen and (min-width: 750px) {
     font-size: 1.2rem;
-    padding: 30px;
+    padding: 40px;
   }
 
   p {
@@ -42,12 +42,136 @@ body {
         }
 
         #logo {
-          height: 28px;
+          height: 55px;
+
+          @media screen and (min-width: 750px) {
+            height: 28px;
+          }
         }
 
         .navLinkContainer {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
+
+          @media screen and (min-width: 750px) {
+            display: flex;
+            flex-direction: row;
+          }
+
+          .logoAndHamburger {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            #hamburger {
+              width: 60px;
+              height: 45px;
+              position: relative;
+              //margin: 50px auto;
+              -webkit-transform: rotate(0deg);
+              -moz-transform: rotate(0deg);
+              -o-transform: rotate(0deg);
+              transform: rotate(0deg);
+              -webkit-transition: 0.5s ease-in-out;
+              -moz-transition: 0.5s ease-in-out;
+              -o-transition: 0.5s ease-in-out;
+              transition: 0.5s ease-in-out;
+              cursor: pointer;
+
+              @media screen and (min-width: 750px) {
+                display:none;
+              }
+            }
+
+            #hamburger span {
+              display: block;
+              position: absolute;
+              height: 9px;
+              width: 100%;
+              background: $white;
+              border-radius: 9px;
+              opacity: 1;
+              left: 0;
+              -webkit-transform: rotate(0deg);
+              -moz-transform: rotate(0deg);
+              -o-transform: rotate(0deg);
+              transform: rotate(0deg);
+              -webkit-transition: 0.25s ease-in-out;
+              -moz-transition: 0.25s ease-in-out;
+              -o-transition: 0.25s ease-in-out;
+              transition: 0.25s ease-in-out;
+            }
+
+            #hamburger span:nth-child(1) {
+              top: 0px;
+              -webkit-transform-origin: left center;
+              -moz-transform-origin: left center;
+              -o-transform-origin: left center;
+              transform-origin: left center;
+            }
+
+            #hamburger span:nth-child(2) {
+              top: 18px;
+              -webkit-transform-origin: left center;
+              -moz-transform-origin: left center;
+              -o-transform-origin: left center;
+              transform-origin: left center;
+            }
+
+            #hamburger span:nth-child(3) {
+              top: 36px;
+              -webkit-transform-origin: left center;
+              -moz-transform-origin: left center;
+              -o-transform-origin: left center;
+              transform-origin: left center;
+            }
+
+            #hamburger.open span:nth-child(1) {
+              -webkit-transform: rotate(45deg);
+              -moz-transform: rotate(45deg);
+              -o-transform: rotate(45deg);
+              transform: rotate(45deg);
+              top: -3px;
+              left: 8px;
+            }
+
+            #hamburger.open span:nth-child(2) {
+              width: 0%;
+              opacity: 0;
+            }
+
+            #hamburger.open span:nth-child(3) {
+              -webkit-transform: rotate(-45deg);
+              -moz-transform: rotate(-45deg);
+              -o-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+              top: 39px;
+              left: 8px;
+            }
+          }
+
+          #navLinks {
+            display: none;
+
+            @media screen and (min-width: 750px) {
+              display: flex;
+              flex-direction: row;
+            }
+          }
+
+          #navLinks.show {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: right;
+
+            @media screen and (min-width: 750px) {
+              display: flex;
+              flex-direction: row;
+            }
+          }
+
         }
 
         .userContainer {
@@ -177,6 +301,9 @@ body {
           width: 100%;
 
           .apodContainer {
+            .imgWrapper {
+              text-align: center;
+            }
             p {
               line-height: 1.2rem;
               text-align: justify;
@@ -267,6 +394,7 @@ body {
         .factContainer {
           .fact {
             line-height: 2rem;
+            text-align: justify;
 
             p {
               text-align: right;
