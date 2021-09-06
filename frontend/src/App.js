@@ -1,6 +1,6 @@
 import "./SCSS/style.scss";
 import { useState, useEffect } from "react";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import Login from "./components/Login";
 import jwt_decode from "jwt-decode";
@@ -34,7 +34,7 @@ function App() {
       }
     };
     checkLoggedIn();
-  }, []);
+  }, []); // eslint-disable-line
 
   // redirects browser to url
   const loginAuth = () => {

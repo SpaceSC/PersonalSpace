@@ -19,7 +19,6 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
     const fetchData = async () => {
       const slashId = "/" + userId;
 
-      const myToken = localStorage.getItem("myToken");
       const response = await fetch(`http://localhost:5000/api/delete-account${userId ? slashId : ""}`, {
         method: "DELETE",
         headers: {

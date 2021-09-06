@@ -31,11 +31,11 @@ function Navbar({ user, logout }) {
           </div>
         </div>
         <div id="navLinks" className={showMenu}>
-          <Link to="/" className="nav-link">
+          <Link to="/" className="nav-link" onClick={hamburgerHandler}>
             Home
           </Link>
           {user && (
-            <Link to="/profile" className="nav-link">
+            <Link to="/profile" className="nav-link" onClick={hamburgerHandler}>
               Profile
             </Link>
           )}
@@ -46,23 +46,25 @@ function Navbar({ user, logout }) {
               )}&scope=openid%20email%20profile&redirect_uri=${encodeURIComponent(
                 process.env.REACT_APP_REDIRECT_URI
               )}&prompt=select_account`}
-              className="nav-link"
+              className="nav-link" onClick={hamburgerHandler}
             >
               Login
             </a>
           )}
           {user && (
-            <Link to="/users" className="nav-link">
+            <Link to="/users" className="nav-link" onClick={hamburgerHandler}>
               Users
             </Link>
           )}
           {user && (
-            <Link to="/mission" className="nav-link">
+            <Link to="/mission" className="nav-link" onClick={hamburgerHandler}>
               Mission
             </Link>
           )}
           {user && (
-            <Link to="/" className="nav-link" onClick={logout}>
+            <Link to="/" className="nav-link" onClick={() => {
+              logout(); 
+              hamburgerHandler();}}>
               Logout
             </Link>
           )}
