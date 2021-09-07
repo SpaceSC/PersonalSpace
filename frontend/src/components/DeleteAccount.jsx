@@ -9,7 +9,7 @@ function DeleteAccount({ selfAndAdmin, userId, fetchUsers }) {
 
   const ok = "Delete Account";
   const cancel = "Cancel";
-  const popupMessage = selfAndAdmin || user.is_admin
+  const popupMessage = selfAndAdmin 
     ? "You are an admin, please consider not deleting your account."
     : "Are you sure you want to delete this account?";
 

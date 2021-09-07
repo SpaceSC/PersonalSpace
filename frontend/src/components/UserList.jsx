@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DeleteAccount from "./DeleteAccount";
 import FilterUsers from "./FilterUsers";
 
-function UserList({ user, setUser, logout }) {
+function UserList({ user }) {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 

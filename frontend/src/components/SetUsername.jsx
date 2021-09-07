@@ -39,7 +39,7 @@ function SetUsername({ user, setUser, logout }) {
       
       )}
       <button className="showMoreBtn" onClick={postUsername}>Set username</button>
-      {user && <DeleteAccount user={user}/>}
+      {user && <DeleteAccount user={user} selfAndAdmin={user.is_admin}/>}
     </div>
   )
 }
