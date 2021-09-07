@@ -27,8 +27,8 @@ function ISSOnGoogleMaps() {
   }, []);
 
   const containerStyle = {
-    width: "300px",
-    height: "300px",
+    width: "320px",
+    height: "320px",
   };
 
   const center = {
@@ -40,7 +40,7 @@ function ISSOnGoogleMaps() {
     <div className="spaceStation">
       {!spaceStation && <h6>Loading Space Station...</h6>}
       {spaceStation && (
-        <div>
+        <div className="issData">
           <p>Name: {spaceStation.name.toUpperCase()}</p>
           <p>NORAD ID: {spaceStation.id}</p>
           <p>Latitude: {spaceStation.latitude}</p>
