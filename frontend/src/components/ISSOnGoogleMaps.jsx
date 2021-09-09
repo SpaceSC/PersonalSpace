@@ -47,7 +47,7 @@ function ISSOnGoogleMaps() {
           <p>Longitude: {spaceStation.longitude}</p>
         </div>
       )}
-      <LoadScript googleMapsApiKey="AIzaSyCtJXTfBMyZbYS1w5MopUzSYWMO9mYFDLw">
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_API_KEY}>
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={2}>
           <Marker icon={customMarker} position={center} />
         </GoogleMap>
